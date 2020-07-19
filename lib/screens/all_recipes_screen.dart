@@ -1,7 +1,7 @@
 import 'package:drinq/models/models.dart';
-import 'package:drinq/nav.dart';
 import 'package:drinq/screens/add_recipe_screen.dart';
-import 'package:drinq/screens/screen_scaffold.dart';
+import 'package:drinq/utils/nav.dart';
+import 'package:drinq/utils/screen_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

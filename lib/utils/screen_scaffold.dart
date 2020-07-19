@@ -16,7 +16,10 @@ class ScreenScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(title)),
-      body: body,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: body,
+      ),
       floatingActionButton: fab,
     );
   }

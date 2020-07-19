@@ -5,15 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AddRecipeScreen extends HookWidget {
-  const AddRecipeScreen({Key key}) : super(key: key);
+class EditRecipeScreen extends HookWidget {
+  final Recipe recipe;
+
+  const EditRecipeScreen({Key key, @required this.recipe}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final nameController = useTextEditingController();
+    final nameController = useTextEditingController(text: recipe.name);
 
     return ScreenScaffold(
-      title: 'Add recipe',
+      title: 'Edit recipe',
       body: ListView(
         children: [
           TextField(
@@ -22,7 +24,9 @@ class AddRecipeScreen extends HookWidget {
               labelText: 'What\'s this drink called?',
             ),
             onSubmitted: (value) {
-              recipesProvider.read(context).add(RecipeDraft(name: value));
+              recipesProvider
+                  .read(context)
+                  .update(recipe.id, draft: RecipeDraft(name: value));
               Nav.of(context).pop(true);
             },
           ),

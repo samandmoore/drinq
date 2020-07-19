@@ -18,6 +18,10 @@ class Nav {
     );
   }
 
+  Future<T> pushScreen<T>(WidgetBuilder builder) async {
+    return navigator.push(MaterialPageRoute(builder: builder));
+  }
+
   void pop<T>([T result]) {
     return navigator.pop(result);
   }

@@ -16,6 +16,7 @@ dependencies:
   state_notifier: any
   flutter_riverpod: any
   flutter_hooks: any
+  uuid: any
 
 dev_dependencies:
   flutter_test:

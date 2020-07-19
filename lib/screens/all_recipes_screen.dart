@@ -1,5 +1,8 @@
 import 'package:drinq/models/models.dart';
 import 'package:drinq/screens/add_recipe_screen.dart';
+import 'package:drinq/screens/view_recipe_screen.dart';
+import 'package:drinq/utils/body_text.dart';
+import 'package:drinq/utils/header.dart';
 import 'package:drinq/utils/nav.dart';
 import 'package:drinq/utils/screen_scaffold.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +17,7 @@ class AllRecipesScreen extends StatelessWidget {
       title: 'All recipes',
       body: ListView(
         children: [
-          Title('recipes'),
+          Header('recipes'),
           RecipeList(),
           OutlineButton(
             child: Text('log out'),
@@ -26,24 +29,16 @@ class AllRecipesScreen extends StatelessWidget {
         return FloatingActionButton(
             child: Icon(Icons.add),
             onPressed: () async {
-              await Nav.of(context).presentScreen((_) => AddRecipeScreen());
-              Scaffold.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(SnackBar(content: Text('Recipe added!')));
+              final recipeAdded = await Nav.of(context)
+                  .presentScreen<bool>((_) => AddRecipeScreen());
+              if (recipeAdded == true) {
+                Scaffold.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(SnackBar(content: Text('Recipe added!')));
+              }
             });
       }),
     );
-  }
-}
-
-class Title extends StatelessWidget {
-  final String text;
-
-  const Title(this.text, {Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(text);
   }
 }
 
@@ -77,7 +72,7 @@ class Empty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('No recipes yet, add one!');
+    return BodyText('No recipes yet, add one!');
   }
 }
 
@@ -91,6 +86,12 @@ class RecipeListRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(recipe.toString());
+    return ListTile(
+      title: BodyText(recipe.toString()),
+      onTap: () => Nav.of(context).pushScreen(
+        (_) => ViewRecipeScreen(recipe: recipe),
+      ),
+      trailing: Icon(Icons.navigate_next),
+    );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:state_notifier/state_notifier.dart';
+import 'package:uuid/uuid.dart';
 
 part 'models.freezed.dart';
 
@@ -37,17 +38,45 @@ final recipesProvider = StateNotifierProvider((_) => RecipeList());
 class RecipeList extends StateNotifier<List<Recipe>> {
   RecipeList([List<Recipe> state]) : super(state ?? []);
 
-  void add(Recipe recipe) {
+  void add(RecipeDraft draft) {
     state = [
       ...state,
-      recipe,
+      Recipe(
+        id: Uuid().v4(),
+        name: draft.name,
+      ),
     ];
   }
+
+  void update(String id, {@required RecipeDraft draft}) {
+    state = [
+      for (final recipe in state)
+        if (recipe.id == id)
+          Recipe(
+            id: id,
+            name: draft.name,
+          )
+        else
+          recipe
+    ];
+  }
+
+  void delete(Recipe recipe) {
+    state = state.where((r) => r != recipe).toList();
+  }
+}
+
+@freezed
+abstract class RecipeDraft with _$RecipeDraft {
+  const factory RecipeDraft({
+    @required String name,
+  }) = _RecipeDraft;
 }
 
 @freezed
 abstract class Recipe with _$Recipe {
   const factory Recipe({
+    @required String id,
     @required String name,
   }) = _Recipe;
 }

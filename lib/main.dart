@@ -21,10 +21,3 @@ class App extends StatelessWidget {
     );
   }
 }
-
-/* screens
-- AllRecipes w/ search
-- RecipeDetails w/ share, edit, delete
-- CreateRecipe
-- EditRecipe
-*/

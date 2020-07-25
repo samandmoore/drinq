@@ -34,6 +34,12 @@ abstract class User with _$User {
 }
 
 final recipesProvider = StateNotifierProvider((_) => RecipeList());
+final currentRecipeIdProvider = StateProvider<String>((_) => null);
+final currentRecipeProvider = Computed<Recipe>((read) {
+  final currentId = read(currentRecipeIdProvider).state;
+  final recipes = read(recipesProvider.state);
+  return recipes.singleWhere((element) => element.id == currentId);
+});
 
 class RecipeList extends StateNotifier<List<Recipe>> {
   RecipeList([List<Recipe> state]) : super(state ?? []);
@@ -44,6 +50,7 @@ class RecipeList extends StateNotifier<List<Recipe>> {
       Recipe(
         id: Uuid().v4(),
         name: draft.name,
+        steps: draft.steps,
       ),
     ];
   }
@@ -55,6 +62,7 @@ class RecipeList extends StateNotifier<List<Recipe>> {
           Recipe(
             id: id,
             name: draft.name,
+            steps: draft.steps,
           )
         else
           recipe
@@ -70,6 +78,7 @@ class RecipeList extends StateNotifier<List<Recipe>> {
 abstract class RecipeDraft with _$RecipeDraft {
   const factory RecipeDraft({
     @required String name,
+    @required String steps,
   }) = _RecipeDraft;
 }
 
@@ -78,5 +87,6 @@ abstract class Recipe with _$Recipe {
   const factory Recipe({
     @required String id,
     @required String name,
+    @required String steps,
   }) = _Recipe;
 }

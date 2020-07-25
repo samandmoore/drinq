@@ -118,9 +118,10 @@ class _$RecipeDraftTearOff {
   const _$RecipeDraftTearOff();
 
 // ignore: unused_element
-  _RecipeDraft call({@required String name}) {
+  _RecipeDraft call({@required String name, @required String steps}) {
     return _RecipeDraft(
       name: name,
+      steps: steps,
     );
   }
 }
@@ -130,6 +131,7 @@ const $RecipeDraft = _$RecipeDraftTearOff();
 
 mixin _$RecipeDraft {
   String get name;
+  String get steps;
 
   $RecipeDraftCopyWith<RecipeDraft> get copyWith;
 }
@@ -138,7 +140,7 @@ abstract class $RecipeDraftCopyWith<$Res> {
   factory $RecipeDraftCopyWith(
           RecipeDraft value, $Res Function(RecipeDraft) then) =
       _$RecipeDraftCopyWithImpl<$Res>;
-  $Res call({String name});
+  $Res call({String name, String steps});
 }
 
 class _$RecipeDraftCopyWithImpl<$Res> implements $RecipeDraftCopyWith<$Res> {
@@ -151,9 +153,11 @@ class _$RecipeDraftCopyWithImpl<$Res> implements $RecipeDraftCopyWith<$Res> {
   @override
   $Res call({
     Object name = freezed,
+    Object steps = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed ? _value.name : name as String,
+      steps: steps == freezed ? _value.steps : steps as String,
     ));
   }
 }
@@ -164,7 +168,7 @@ abstract class _$RecipeDraftCopyWith<$Res>
           _RecipeDraft value, $Res Function(_RecipeDraft) then) =
       __$RecipeDraftCopyWithImpl<$Res>;
   @override
-  $Res call({String name});
+  $Res call({String name, String steps});
 }
 
 class __$RecipeDraftCopyWithImpl<$Res> extends _$RecipeDraftCopyWithImpl<$Res>
@@ -179,22 +183,28 @@ class __$RecipeDraftCopyWithImpl<$Res> extends _$RecipeDraftCopyWithImpl<$Res>
   @override
   $Res call({
     Object name = freezed,
+    Object steps = freezed,
   }) {
     return _then(_RecipeDraft(
       name: name == freezed ? _value.name : name as String,
+      steps: steps == freezed ? _value.steps : steps as String,
     ));
   }
 }
 
 class _$_RecipeDraft implements _RecipeDraft {
-  const _$_RecipeDraft({@required this.name}) : assert(name != null);
+  const _$_RecipeDraft({@required this.name, @required this.steps})
+      : assert(name != null),
+        assert(steps != null);
 
   @override
   final String name;
+  @override
+  final String steps;
 
   @override
   String toString() {
-    return 'RecipeDraft(name: $name)';
+    return 'RecipeDraft(name: $name, steps: $steps)';
   }
 
   @override
@@ -202,12 +212,16 @@ class _$_RecipeDraft implements _RecipeDraft {
     return identical(this, other) ||
         (other is _RecipeDraft &&
             (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)));
+                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.steps, steps) ||
+                const DeepCollectionEquality().equals(other.steps, steps)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(name);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(steps);
 
   @override
   _$RecipeDraftCopyWith<_RecipeDraft> get copyWith =>
@@ -215,10 +229,13 @@ class _$_RecipeDraft implements _RecipeDraft {
 }
 
 abstract class _RecipeDraft implements RecipeDraft {
-  const factory _RecipeDraft({@required String name}) = _$_RecipeDraft;
+  const factory _RecipeDraft({@required String name, @required String steps}) =
+      _$_RecipeDraft;
 
   @override
   String get name;
+  @override
+  String get steps;
   @override
   _$RecipeDraftCopyWith<_RecipeDraft> get copyWith;
 }
@@ -227,10 +244,12 @@ class _$RecipeTearOff {
   const _$RecipeTearOff();
 
 // ignore: unused_element
-  _Recipe call({@required String id, @required String name}) {
+  _Recipe call(
+      {@required String id, @required String name, @required String steps}) {
     return _Recipe(
       id: id,
       name: name,
+      steps: steps,
     );
   }
 }
@@ -241,6 +260,7 @@ const $Recipe = _$RecipeTearOff();
 mixin _$Recipe {
   String get id;
   String get name;
+  String get steps;
 
   $RecipeCopyWith<Recipe> get copyWith;
 }
@@ -248,7 +268,7 @@ mixin _$Recipe {
 abstract class $RecipeCopyWith<$Res> {
   factory $RecipeCopyWith(Recipe value, $Res Function(Recipe) then) =
       _$RecipeCopyWithImpl<$Res>;
-  $Res call({String id, String name});
+  $Res call({String id, String name, String steps});
 }
 
 class _$RecipeCopyWithImpl<$Res> implements $RecipeCopyWith<$Res> {
@@ -262,10 +282,12 @@ class _$RecipeCopyWithImpl<$Res> implements $RecipeCopyWith<$Res> {
   $Res call({
     Object id = freezed,
     Object name = freezed,
+    Object steps = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as String,
       name: name == freezed ? _value.name : name as String,
+      steps: steps == freezed ? _value.steps : steps as String,
     ));
   }
 }
@@ -274,7 +296,7 @@ abstract class _$RecipeCopyWith<$Res> implements $RecipeCopyWith<$Res> {
   factory _$RecipeCopyWith(_Recipe value, $Res Function(_Recipe) then) =
       __$RecipeCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String name});
+  $Res call({String id, String name, String steps});
 }
 
 class __$RecipeCopyWithImpl<$Res> extends _$RecipeCopyWithImpl<$Res>
@@ -289,27 +311,33 @@ class __$RecipeCopyWithImpl<$Res> extends _$RecipeCopyWithImpl<$Res>
   $Res call({
     Object id = freezed,
     Object name = freezed,
+    Object steps = freezed,
   }) {
     return _then(_Recipe(
       id: id == freezed ? _value.id : id as String,
       name: name == freezed ? _value.name : name as String,
+      steps: steps == freezed ? _value.steps : steps as String,
     ));
   }
 }
 
 class _$_Recipe implements _Recipe {
-  const _$_Recipe({@required this.id, @required this.name})
+  const _$_Recipe(
+      {@required this.id, @required this.name, @required this.steps})
       : assert(id != null),
-        assert(name != null);
+        assert(name != null),
+        assert(steps != null);
 
   @override
   final String id;
   @override
   final String name;
+  @override
+  final String steps;
 
   @override
   String toString() {
-    return 'Recipe(id: $id, name: $name)';
+    return 'Recipe(id: $id, name: $name, steps: $steps)';
   }
 
   @override
@@ -319,14 +347,17 @@ class _$_Recipe implements _Recipe {
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)));
+                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.steps, steps) ||
+                const DeepCollectionEquality().equals(other.steps, steps)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(name);
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(steps);
 
   @override
   _$RecipeCopyWith<_Recipe> get copyWith =>
@@ -334,13 +365,17 @@ class _$_Recipe implements _Recipe {
 }
 
 abstract class _Recipe implements Recipe {
-  const factory _Recipe({@required String id, @required String name}) =
-      _$_Recipe;
+  const factory _Recipe(
+      {@required String id,
+      @required String name,
+      @required String steps}) = _$_Recipe;
 
   @override
   String get id;
   @override
   String get name;
+  @override
+  String get steps;
   @override
   _$RecipeCopyWith<_Recipe> get copyWith;
 }

@@ -15,6 +15,7 @@ dependencies:
   freezed_annotation: any
   state_notifier: any
   flutter_riverpod: any
+  hooks_riverpod: any
   flutter_hooks: any
   uuid: any
 

@@ -1,6 +1,8 @@
 import 'package:drinq/models/models.dart';
+import 'package:drinq/utils/body_text.dart';
 import 'package:drinq/utils/nav.dart';
 import 'package:drinq/utils/screen_scaffold.dart';
+import 'package:drinq/utils/space.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,6 +13,7 @@ class AddRecipeScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final nameController = useTextEditingController();
+    final stepController = useTextEditingController();
 
     return ScreenScaffold(
       title: 'Add recipe',
@@ -21,8 +24,22 @@ class AddRecipeScreen extends HookWidget {
             decoration: const InputDecoration(
               labelText: 'What\'s this drink called?',
             ),
-            onSubmitted: (value) {
-              recipesProvider.read(context).add(RecipeDraft(name: value));
+          ),
+          VSpace(byFactorOf: 2),
+          BodyText('Steps'),
+          TextField(
+            controller: stepController,
+            maxLines: null,
+          ),
+          OutlineButton(
+            child: Text('save'),
+            onPressed: () {
+              recipesProvider.read(context).add(
+                    RecipeDraft(
+                      name: nameController.value.text,
+                      steps: stepController.value.text,
+                    ),
+                  );
               Nav.of(context).pop(true);
             },
           ),

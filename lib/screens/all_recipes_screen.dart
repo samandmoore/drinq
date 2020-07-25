@@ -60,7 +60,8 @@ class RecipeList extends StatelessWidget {
         itemCount: recipes.length,
         itemBuilder: (context, index) {
           final recipe = recipes[index];
-          return RecipeListRow(recipe: recipe);
+          return RecipeListRow(
+              recipe: recipe, includeDivider: index < recipes.length);
         },
       );
     });
@@ -78,20 +79,30 @@ class Empty extends StatelessWidget {
 
 class RecipeListRow extends StatelessWidget {
   final Recipe recipe;
+  final bool includeDivider;
 
   const RecipeListRow({
     Key key,
     @required this.recipe,
+    this.includeDivider = true,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: BodyText(recipe.toString()),
-      onTap: () => Nav.of(context).pushScreen(
-        (_) => ViewRecipeScreen(recipe: recipe),
-      ),
-      trailing: Icon(Icons.navigate_next),
+    return Column(
+      children: [
+        ListTile(
+          title: BodyText(recipe.name),
+          onTap: () {
+            currentRecipeIdProvider.read(context).state = recipe.id;
+            Nav.of(context).pushScreen(
+              (_) => ViewRecipeScreen(),
+            );
+          },
+          trailing: Icon(Icons.navigate_next),
+        ),
+        Divider(),
+      ],
     );
   }
 }

@@ -16,7 +16,7 @@ class LoginScreen extends StatelessWidget {
           OutlineButton(
             child: Text('log in'),
             onPressed: () =>
-                userProvider.read(context).login(User(name: 'Sam')),
+                context.read(userProvider).login(User(name: 'Sam')),
           )
         ],
       ),

@@ -36,7 +36,7 @@ class EditRecipeScreen extends HookWidget {
           OutlineButton(
             child: Text('save'),
             onPressed: () {
-              recipesProvider.read(context).update(
+              context.read(recipesProvider).update(
                     recipe.id,
                     draft: RecipeDraft(
                       name: nameController.value.text,

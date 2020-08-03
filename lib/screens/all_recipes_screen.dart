@@ -21,7 +21,7 @@ class AllRecipesScreen extends StatelessWidget {
           RecipeList(),
           OutlineButton(
             child: Text('log out'),
-            onPressed: () => userProvider.read(context).logout(),
+            onPressed: () => context.read(userProvider).logout(),
           )
         ],
       ),
@@ -94,7 +94,7 @@ class RecipeListRow extends StatelessWidget {
         ListTile(
           title: BodyText(recipe.name),
           onTap: () {
-            currentRecipeIdProvider.read(context).state = recipe.id;
+            context.read(currentRecipeIdProvider).state = recipe.id;
             Nav.of(context).pushScreen(
               (_) => ViewRecipeScreen(),
             );

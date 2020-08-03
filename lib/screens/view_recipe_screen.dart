@@ -52,7 +52,7 @@ class ViewRecipeScreen extends HookWidget {
                         child: OutlineButton(
                           child: Text('yes'),
                           onPressed: () {
-                            recipesProvider.read(context).delete(recipe);
+                            context.read(recipesProvider).delete(recipe);
                             Nav.of(context)..pop()..pop();
                           },
                         ),

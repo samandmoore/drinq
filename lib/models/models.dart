@@ -35,9 +35,9 @@ abstract class User with _$User {
 
 final recipesProvider = StateNotifierProvider((_) => RecipeList());
 final currentRecipeIdProvider = StateProvider<String>((_) => null);
-final currentRecipeProvider = Computed<Recipe>((read) {
-  final currentId = read(currentRecipeIdProvider).state;
-  final recipes = read(recipesProvider.state);
+final currentRecipeProvider = Provider<Recipe>((ref) {
+  final currentId = ref.watch(currentRecipeIdProvider).state;
+  final recipes = ref.watch(recipesProvider.state);
   return recipes.singleWhere((element) => element.id == currentId);
 });
 

@@ -18,11 +18,13 @@ dependencies:
   hooks_riverpod: 0.6.0-dev+2
   flutter_hooks: any
   uuid: any
+  localstorage: any
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   freezed: any
+  json_serializable: any
   build_runner: any
 
 flutter:

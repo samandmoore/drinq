@@ -1,3 +1,4 @@
+import 'package:drinq/models/api.dart';
 import 'package:drinq/models/models.dart';
 import 'package:drinq/utils/body_text.dart';
 import 'package:drinq/utils/nav.dart';
@@ -35,14 +36,15 @@ class EditRecipeScreen extends HookWidget {
           ),
           OutlineButton(
             child: Text('save'),
-            onPressed: () {
-              context.read(recipesProvider).update(
+            onPressed: () async {
+              await context.read(apiProvider).updateRecipe(
                     recipe.id,
                     draft: RecipeDraft(
                       name: nameController.value.text,
                       steps: stepController.value.text,
                     ),
                   );
+              context.refresh(recipesProvider);
               Nav.of(context).pop(true);
             },
           ),

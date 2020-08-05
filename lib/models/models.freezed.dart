@@ -240,6 +240,10 @@ abstract class _RecipeDraft implements RecipeDraft {
   _$RecipeDraftCopyWith<_RecipeDraft> get copyWith;
 }
 
+Recipe _$RecipeFromJson(Map<String, dynamic> json) {
+  return _Recipe.fromJson(json);
+}
+
 class _$RecipeTearOff {
   const _$RecipeTearOff();
 
@@ -262,6 +266,7 @@ mixin _$Recipe {
   String get name;
   String get steps;
 
+  Map<String, dynamic> toJson();
   $RecipeCopyWith<Recipe> get copyWith;
 }
 
@@ -321,12 +326,16 @@ class __$RecipeCopyWithImpl<$Res> extends _$RecipeCopyWithImpl<$Res>
   }
 }
 
+@JsonSerializable()
 class _$_Recipe implements _Recipe {
   const _$_Recipe(
       {@required this.id, @required this.name, @required this.steps})
       : assert(id != null),
         assert(name != null),
         assert(steps != null);
+
+  factory _$_Recipe.fromJson(Map<String, dynamic> json) =>
+      _$_$_RecipeFromJson(json);
 
   @override
   final String id;
@@ -362,6 +371,11 @@ class _$_Recipe implements _Recipe {
   @override
   _$RecipeCopyWith<_Recipe> get copyWith =>
       __$RecipeCopyWithImpl<_Recipe>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_RecipeToJson(this);
+  }
 }
 
 abstract class _Recipe implements Recipe {
@@ -369,6 +383,8 @@ abstract class _Recipe implements Recipe {
       {@required String id,
       @required String name,
       @required String steps}) = _$_Recipe;
+
+  factory _Recipe.fromJson(Map<String, dynamic> json) = _$_Recipe.fromJson;
 
   @override
   String get id;

@@ -15,15 +15,18 @@ class AllRecipesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenScaffold(
       title: 'All recipes',
-      body: ListView(
-        children: [
-          Header('recipes'),
-          RecipeList(),
-          OutlineButton(
-            child: Text('log out'),
-            onPressed: () => context.read(userProvider).logout(),
-          )
-        ],
+      body: RefreshIndicator(
+        onRefresh: () => context.refresh(recipesProvider),
+        child: ListView(
+          children: [
+            Header('recipes'),
+            RecipeList(),
+            OutlineButton(
+              child: Text('log out'),
+              onPressed: () => context.read(userProvider).logout(),
+            )
+          ],
+        ),
       ),
       fab: Builder(builder: (context) {
         return FloatingActionButton(
@@ -50,18 +53,40 @@ class RecipeList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer((_, read) {
-      final recipes = read(recipesProvider.state);
-      if (recipes.isEmpty) {
-        return Empty();
-      }
+      final recipes = read(recipesProvider);
 
-      return ListView.builder(
-        shrinkWrap: true,
-        itemCount: recipes.length,
-        itemBuilder: (context, index) {
-          final recipe = recipes[index];
-          return RecipeListRow(
-              recipe: recipe, includeDivider: index < recipes.length);
+      return recipes.when(
+        data: (data) {
+          if (data.isEmpty) {
+            return Empty();
+          }
+          return ListView.builder(
+            shrinkWrap: true,
+            itemCount: data.length,
+            itemBuilder: (context, index) {
+              final recipe = data[index];
+              return RecipeListRow(
+                recipe: recipe,
+                includeDivider: index < data.length,
+              );
+            },
+          );
+        },
+        loading: () {
+          return Center(child: CircularProgressIndicator());
+        },
+        error: (e, __) {
+          return Center(
+            child: Column(
+              children: [
+                Text(e.toString()),
+                OutlineButton(
+                  child: Text('Retry'),
+                  onPressed: () => context.refresh(recipesProvider),
+                )
+              ],
+            ),
+          );
         },
       );
     });

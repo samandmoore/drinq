@@ -1,16 +1,11 @@
+import 'package:drinq/models/api.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:state_notifier/state_notifier.dart';
 import 'package:uuid/uuid.dart';
 
 part 'models.freezed.dart';
-
-/* models
-- User
-- Recipe(ingredients, steps, servings)
-- Ingredient(name, amount, unit)
-- Step(text)
-*/
+part 'models.g.dart';
 
 class UserNotifier extends StateNotifier<User> {
   UserNotifier(User state) : super(state);
@@ -33,12 +28,17 @@ abstract class User with _$User {
   }) = _User;
 }
 
-final recipesProvider = StateNotifierProvider((_) => RecipeList());
+final recipeStateProvider = StateNotifierProvider((_) => RecipeList());
+final recipesProvider = FutureProvider<List<Recipe>>((ref) {
+  final api = ref.read(apiProvider);
+  return api.fetchRecipes();
+});
+
 final currentRecipeIdProvider = StateProvider<String>((_) => null);
-final currentRecipeProvider = Provider<Recipe>((ref) {
-  final currentId = ref.watch(currentRecipeIdProvider).state;
-  final recipes = ref.watch(recipesProvider.state);
-  return recipes.singleWhere((element) => element.id == currentId);
+final currentRecipeProvider =
+    Provider.autoDispose.family<AsyncValue<Recipe>, String>((ref, id) {
+  final recipes = ref.watch(recipesProvider);
+  return recipes.whenData((value) => value.singleWhere((r) => r.id == id));
 });
 
 class RecipeList extends StateNotifier<List<Recipe>> {
@@ -89,4 +89,6 @@ abstract class Recipe with _$Recipe {
     @required String name,
     @required String steps,
   }) = _Recipe;
+
+  factory Recipe.fromJson(Map<String, dynamic> json) => _$RecipeFromJson(json);
 }

@@ -6,6 +6,12 @@ import 'package:state_notifier/state_notifier.dart';
 part 'models.freezed.dart';
 part 'models.g.dart';
 
+class Void {
+  static const Void _instance = Void._();
+  const Void._();
+  factory Void() => _instance;
+}
+
 class UserNotifier extends StateNotifier<User> {
   UserNotifier(User state) : super(state);
 

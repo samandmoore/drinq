@@ -29,8 +29,8 @@ class ViewRecipeScreen extends HookWidget {
         loading: () {
           return Center(child: CircularProgressIndicator());
         },
-        error: (_, __) {
-          return Center(child: Text('Oops!'));
+        error: (e, __) {
+          return Center(child: Text(e.toString()));
         },
       ),
     );
@@ -68,36 +68,48 @@ class _RecipeDataView extends StatelessWidget {
             showModalBottomSheet(
               context: context,
               builder: (bottomSheetContext) {
-                return Column(
-                  children: [
-                    BodyText(
-                      'are you sure you want to delete this recipe?',
-                    ),
-                    HStretch(
-                      child: OutlineButton(
-                        child: Text('yes'),
-                        onPressed: () async {
-                          await context
-                              .read(apiProvider)
-                              .deleteRecipe(recipe.id);
-                          context.refresh(recipesProvider);
-                          Nav.of(context)..pop()..pop();
-                        },
-                      ),
-                    ),
-                    HStretch(
-                      child: OutlineButton(
-                        child: Text('no'),
-                        onPressed: () {
-                          Nav.of(bottomSheetContext).pop();
-                        },
-                      ),
-                    ),
-                  ],
-                );
+                return _DeleteSheet(recipe: recipe);
               },
             );
           },
+        ),
+      ],
+    );
+  }
+}
+
+class _DeleteSheet extends StatelessWidget {
+  const _DeleteSheet({
+    Key key,
+    @required this.recipe,
+  }) : super(key: key);
+
+  final Recipe recipe;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        BodyText(
+          'are you sure you want to delete this recipe?',
+        ),
+        HStretch(
+          child: OutlineButton(
+            child: Text('yes'),
+            onPressed: () async {
+              await context.read(apiProvider).deleteRecipe(recipe.id);
+              context.refresh(recipesProvider);
+              Nav.of(context)..pop()..pop();
+            },
+          ),
+        ),
+        HStretch(
+          child: OutlineButton(
+            child: Text('no'),
+            onPressed: () {
+              Nav.of(context).pop();
+            },
+          ),
         ),
       ],
     );

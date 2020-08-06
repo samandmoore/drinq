@@ -17,12 +17,19 @@ extension on String {
 }
 
 @freezed
-abstract class State with _$State {
+abstract class State implements _$State {
   const factory State({
     @nullable String nameError,
     @nullable String stepsError,
     @Default(AsyncValue<bool>.data(false)) AsyncValue<bool> result,
   }) = _State;
+
+  bool hasErrors() {
+    return [
+      nameError,
+      stepsError,
+    ].any((e) => e != null);
+  }
 }
 
 class AddRecipeNotifier extends StateNotifier<_State> {
@@ -36,9 +43,7 @@ class AddRecipeNotifier extends StateNotifier<_State> {
       stepsError: draft.steps.isNullOrBlank ? 'Required' : null,
     );
 
-    if ([state.nameError, state.stepsError].any((e) => e != null)) {
-      return;
-    }
+    if (state.hasErrors()) return;
 
     state = state.copyWith(result: AsyncValue.loading());
     state = state.copyWith(

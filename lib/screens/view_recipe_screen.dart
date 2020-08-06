@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:state_notifier/state_notifier.dart';
 
 class ViewRecipeScreen extends HookWidget {
   const ViewRecipeScreen({Key key}) : super(key: key);
@@ -78,8 +79,53 @@ class _RecipeDataView extends StatelessWidget {
   }
 }
 
-class _DeleteSheet extends StatelessWidget {
+class DeleteRecipeNotifier extends StateNotifier<AsyncValue<bool>> {
+  final Api api;
+
+  DeleteRecipeNotifier({@required this.api}) : super(AsyncValue.data(false));
+
+  Future<void> deleteRecipe(String id) async {
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(() async {
+      await api.deleteRecipe(id);
+      return true;
+    });
+  }
+}
+
+final _deleteRecipeProvider = StateNotifierProvider.autoDispose(
+  (ref) => DeleteRecipeNotifier(api: ref.read(apiProvider)),
+);
+
+class _DeleteSheet extends HookWidget {
+  final Recipe recipe;
+
   const _DeleteSheet({
+    Key key,
+    @required this.recipe,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ProviderListener(
+      onChange: (AsyncValue<bool> result) {
+        if (result.data?.value ?? false) {
+          context.refresh(recipesProvider);
+          Nav.of(context)..pop()..pop();
+        }
+      },
+      provider: _deleteRecipeProvider.state,
+      child: useProvider(_deleteRecipeProvider.state).when(
+        data: (_) => _ConfirmDelete(recipe: recipe),
+        loading: () => Center(child: CircularProgressIndicator()),
+        error: (e, __) => Center(child: Text(e.toString())),
+      ),
+    );
+  }
+}
+
+class _ConfirmDelete extends StatelessWidget {
+  const _ConfirmDelete({
     Key key,
     @required this.recipe,
   }) : super(key: key);
@@ -96,10 +142,8 @@ class _DeleteSheet extends StatelessWidget {
         HStretch(
           child: OutlineButton(
             child: Text('yes'),
-            onPressed: () async {
-              await context.read(apiProvider).deleteRecipe(recipe.id);
-              context.refresh(recipesProvider);
-              Nav.of(context)..pop()..pop();
+            onPressed: () {
+              context.read(_deleteRecipeProvider).deleteRecipe(recipe.id);
             },
           ),
         ),

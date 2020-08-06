@@ -30,16 +30,17 @@ class AllRecipesScreen extends StatelessWidget {
       ),
       fab: Builder(builder: (context) {
         return FloatingActionButton(
-            child: Icon(Icons.add),
-            onPressed: () async {
-              final recipeAdded = await Nav.of(context)
-                  .presentScreen<bool>((_) => AddRecipeScreen());
-              if (recipeAdded == true) {
-                Scaffold.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(SnackBar(content: Text('Recipe added!')));
-              }
-            });
+          child: Icon(Icons.add),
+          onPressed: () async {
+            final recipeAdded = await Nav.of(context)
+                .presentScreen<bool>((_) => AddRecipeScreen());
+            if (recipeAdded == true) {
+              Scaffold.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(SnackBar(content: Text('Recipe added!')));
+            }
+          },
+        );
       }),
     );
   }

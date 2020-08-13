@@ -55,7 +55,7 @@ class AddRecipeNotifier extends StateNotifier<_State> {
   }
 }
 
-final _addRecipeProvider = StateNotifierProvider.autoDispose(
+final addRecipeProvider = StateNotifierProvider.autoDispose(
   (ref) => AddRecipeNotifier(api: ref.read(apiProvider)),
 );
 
@@ -66,7 +66,7 @@ class AddRecipeScreen extends HookWidget {
   Widget build(BuildContext context) {
     final nameController = useTextEditingController();
     final stepController = useTextEditingController();
-    final state = useProvider(_addRecipeProvider.state);
+    final state = useProvider(addRecipeProvider.state);
 
     return ProviderListener(
       onChange: (_State state) {
@@ -75,7 +75,7 @@ class AddRecipeScreen extends HookWidget {
           Nav.of(context)..pop(true);
         }
       },
-      provider: _addRecipeProvider.state,
+      provider: addRecipeProvider.state,
       child: ScreenScaffold(
         title: 'Add recipe',
         body: state.result.when(
@@ -101,7 +101,7 @@ class AddRecipeScreen extends HookWidget {
                 OutlineButton(
                   child: Text('save'),
                   onPressed: () async {
-                    context.read(_addRecipeProvider).createRecipe(
+                    context.read(addRecipeProvider).createRecipe(
                           RecipeDraft(
                             name: nameController.value.text,
                             steps: stepController.value.text,

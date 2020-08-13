@@ -93,7 +93,7 @@ class DeleteRecipeNotifier extends StateNotifier<AsyncValue<bool>> {
   }
 }
 
-final _deleteRecipeProvider = StateNotifierProvider.autoDispose(
+final deleteRecipeProvider = StateNotifierProvider.autoDispose(
   (ref) => DeleteRecipeNotifier(api: ref.read(apiProvider)),
 );
 
@@ -114,8 +114,8 @@ class _DeleteSheet extends HookWidget {
           Nav.of(context)..pop()..pop();
         }
       },
-      provider: _deleteRecipeProvider.state,
-      child: useProvider(_deleteRecipeProvider.state).when(
+      provider: deleteRecipeProvider.state,
+      child: useProvider(deleteRecipeProvider.state).when(
         data: (_) => _ConfirmDelete(recipe: recipe),
         loading: () => Center(child: CircularProgressIndicator()),
         error: (e, __) => Center(child: Text(e.toString())),
@@ -143,7 +143,7 @@ class _ConfirmDelete extends StatelessWidget {
           child: OutlineButton(
             child: Text('yes'),
             onPressed: () {
-              context.read(_deleteRecipeProvider).deleteRecipe(recipe.id);
+              context.read(deleteRecipeProvider).deleteRecipe(recipe.id);
             },
           ),
         ),

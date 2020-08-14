@@ -18,6 +18,8 @@ extension on String {
 
 @freezed
 abstract class State implements _$State {
+  const State._();
+
   const factory State({
     @nullable String nameError,
     @nullable String stepsError,

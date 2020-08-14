@@ -117,12 +117,13 @@ class __$StateCopyWithImpl<$Res> extends _$StateCopyWithImpl<$Res>
   }
 }
 
-class _$_State implements _State {
+class _$_State extends _State {
   const _$_State(
       {@nullable this.nameError,
       @nullable this.stepsError,
       this.result = const AsyncValue<bool>.data(false)})
-      : assert(result != null);
+      : assert(result != null),
+        super._();
 
   @override
   @nullable
@@ -165,7 +166,8 @@ class _$_State implements _State {
       __$StateCopyWithImpl<_State>(this, _$identity);
 }
 
-abstract class _State implements State {
+abstract class _State extends State {
+  const _State._() : super._();
   const factory _State(
       {@nullable String nameError,
       @nullable String stepsError,

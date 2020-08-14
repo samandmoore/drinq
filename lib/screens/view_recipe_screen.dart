@@ -81,20 +81,28 @@ class _RecipeDataView extends StatelessWidget {
 
 class DeleteRecipeNotifier extends StateNotifier<AsyncValue<bool>> {
   final Api api;
+  final VoidCallback refreshRecipes;
 
-  DeleteRecipeNotifier({@required this.api}) : super(AsyncValue.data(false));
+  DeleteRecipeNotifier({
+    @required this.api,
+    @required this.refreshRecipes,
+  }) : super(AsyncValue.data(false));
 
   Future<void> deleteRecipe(String id) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       await api.deleteRecipe(id);
+      refreshRecipes();
       return true;
     });
   }
 }
 
 final deleteRecipeProvider = StateNotifierProvider.autoDispose(
-  (ref) => DeleteRecipeNotifier(api: ref.read(apiProvider)),
+  (ref) => DeleteRecipeNotifier(
+    api: ref.read(apiProvider),
+    refreshRecipes: () => ref.container.refresh(recipesProvider),
+  ),
 );
 
 class _DeleteSheet extends HookWidget {
@@ -110,7 +118,6 @@ class _DeleteSheet extends HookWidget {
     return ProviderListener(
       onChange: (AsyncValue<bool> result) {
         if (result.data?.value ?? false) {
-          context.refresh(recipesProvider);
           Nav.of(context)..pop()..pop();
         }
       },

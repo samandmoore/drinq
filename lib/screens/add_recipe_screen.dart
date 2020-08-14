@@ -36,8 +36,12 @@ abstract class State implements _$State {
 
 class AddRecipeNotifier extends StateNotifier<_State> {
   final Api api;
+  final VoidCallback refreshRecipes;
 
-  AddRecipeNotifier({@required this.api}) : super(_State());
+  AddRecipeNotifier({
+    @required this.api,
+    @required this.refreshRecipes,
+  }) : super(_State());
 
   Future<void> createRecipe(RecipeDraft draft) async {
     state = state.copyWith(
@@ -51,6 +55,7 @@ class AddRecipeNotifier extends StateNotifier<_State> {
     state = state.copyWith(
       result: await AsyncValue.guard(() async {
         await api.createRecipe(draft);
+        refreshRecipes();
         return true;
       }),
     );
@@ -58,7 +63,10 @@ class AddRecipeNotifier extends StateNotifier<_State> {
 }
 
 final addRecipeProvider = StateNotifierProvider.autoDispose(
-  (ref) => AddRecipeNotifier(api: ref.read(apiProvider)),
+  (ref) => AddRecipeNotifier(
+    api: ref.read(apiProvider),
+    refreshRecipes: () => ref.container.refresh(recipesProvider),
+  ),
 );
 
 class AddRecipeScreen extends HookWidget {
@@ -73,7 +81,6 @@ class AddRecipeScreen extends HookWidget {
     return ProviderListener(
       onChange: (_State state) {
         if (state.result.data?.value ?? false) {
-          context.refresh(recipesProvider);
           Nav.of(context)..pop(true);
         }
       },

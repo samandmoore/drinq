@@ -3,6 +3,7 @@ import 'package:drinq/models/models.dart';
 import 'package:drinq/utils/nav.dart';
 import 'package:drinq/utils/screen_scaffold.dart';
 import 'package:drinq/utils/space.dart';
+import 'package:drinq/utils/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,19 +13,15 @@ import 'package:state_notifier/state_notifier.dart';
 
 part 'add_recipe_screen.freezed.dart';
 
-extension on String {
-  bool get isNullOrBlank => this == null || this.trim().length == 0;
-}
-
 @freezed
-abstract class State implements _$State {
-  const State._();
+abstract class AddRecipeScreenState implements _$AddRecipeScreenState {
+  const AddRecipeScreenState._();
 
-  const factory State({
+  const factory AddRecipeScreenState({
     @nullable String nameError,
     @nullable String stepsError,
     @Default(AsyncValue<bool>.data(false)) AsyncValue<bool> result,
-  }) = _State;
+  }) = _AddRecipeScreenState;
 
   bool hasErrors() {
     return [
@@ -34,14 +31,14 @@ abstract class State implements _$State {
   }
 }
 
-class AddRecipeNotifier extends StateNotifier<_State> {
+class AddRecipeScreenNotifier extends StateNotifier<AddRecipeScreenState> {
   final Api api;
   final VoidCallback refreshRecipes;
 
-  AddRecipeNotifier({
+  AddRecipeScreenNotifier({
     @required this.api,
     @required this.refreshRecipes,
-  }) : super(_State());
+  }) : super(AddRecipeScreenState());
 
   Future<void> createRecipe(RecipeDraft draft) async {
     state = state.copyWith(
@@ -62,8 +59,8 @@ class AddRecipeNotifier extends StateNotifier<_State> {
   }
 }
 
-final addRecipeProvider = StateNotifierProvider.autoDispose(
-  (ref) => AddRecipeNotifier(
+final addRecipeScreenNotifierProvider = StateNotifierProvider.autoDispose(
+  (ref) => AddRecipeScreenNotifier(
     api: ref.read(apiProvider),
     refreshRecipes: () => ref.container.refresh(recipesProvider),
   ),
@@ -76,15 +73,15 @@ class AddRecipeScreen extends HookWidget {
   Widget build(BuildContext context) {
     final nameController = useTextEditingController();
     final stepController = useTextEditingController();
-    final state = useProvider(addRecipeProvider.state);
+    final state = useProvider(addRecipeScreenNotifierProvider.state);
 
     return ProviderListener(
-      onChange: (_State state) {
+      onChange: (AddRecipeScreenState state) {
         if (state.result.data?.value ?? false) {
           Nav.of(context)..pop(true);
         }
       },
-      provider: addRecipeProvider.state,
+      provider: addRecipeScreenNotifierProvider.state,
       child: ScreenScaffold(
         title: 'Add recipe',
         body: state.result.when(
@@ -110,7 +107,7 @@ class AddRecipeScreen extends HookWidget {
                 OutlineButton(
                   child: Text('save'),
                   onPressed: () async {
-                    context.read(addRecipeProvider).createRecipe(
+                    context.read(addRecipeScreenNotifierProvider).createRecipe(
                           RecipeDraft(
                             name: nameController.value.text,
                             steps: stepController.value.text,

@@ -23,7 +23,7 @@ class AllRecipesScreen extends StatelessWidget {
             RecipeList(),
             OutlineButton(
               child: Text('log out'),
-              onPressed: () => context.read(userProvider).logout(),
+              onPressed: () => context.read(authProvider).clearToken(),
             )
           ],
         ),

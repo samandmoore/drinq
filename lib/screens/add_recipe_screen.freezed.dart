@@ -9,15 +9,15 @@ part of 'add_recipe_screen.dart';
 
 T _$identity<T>(T value) => value;
 
-class _$StateTearOff {
-  const _$StateTearOff();
+class _$AddRecipeScreenStateTearOff {
+  const _$AddRecipeScreenStateTearOff();
 
 // ignore: unused_element
-  _State call(
+  _AddRecipeScreenState call(
       {@nullable String nameError,
       @nullable String stepsError,
       AsyncValue<bool> result = const AsyncValue<bool>.data(false)}) {
-    return _State(
+    return _AddRecipeScreenState(
       nameError: nameError,
       stepsError: stepsError,
       result: result,
@@ -26,21 +26,22 @@ class _$StateTearOff {
 }
 
 // ignore: unused_element
-const $State = _$StateTearOff();
+const $AddRecipeScreenState = _$AddRecipeScreenStateTearOff();
 
-mixin _$State {
+mixin _$AddRecipeScreenState {
   @nullable
   String get nameError;
   @nullable
   String get stepsError;
   AsyncValue<bool> get result;
 
-  $StateCopyWith<State> get copyWith;
+  $AddRecipeScreenStateCopyWith<AddRecipeScreenState> get copyWith;
 }
 
-abstract class $StateCopyWith<$Res> {
-  factory $StateCopyWith(State value, $Res Function(State) then) =
-      _$StateCopyWithImpl<$Res>;
+abstract class $AddRecipeScreenStateCopyWith<$Res> {
+  factory $AddRecipeScreenStateCopyWith(AddRecipeScreenState value,
+          $Res Function(AddRecipeScreenState) then) =
+      _$AddRecipeScreenStateCopyWithImpl<$Res>;
   $Res call(
       {@nullable String nameError,
       @nullable String stepsError,
@@ -49,12 +50,13 @@ abstract class $StateCopyWith<$Res> {
   $AsyncValueCopyWith<bool, $Res> get result;
 }
 
-class _$StateCopyWithImpl<$Res> implements $StateCopyWith<$Res> {
-  _$StateCopyWithImpl(this._value, this._then);
+class _$AddRecipeScreenStateCopyWithImpl<$Res>
+    implements $AddRecipeScreenStateCopyWith<$Res> {
+  _$AddRecipeScreenStateCopyWithImpl(this._value, this._then);
 
-  final State _value;
+  final AddRecipeScreenState _value;
   // ignore: unused_field
-  final $Res Function(State) _then;
+  final $Res Function(AddRecipeScreenState) _then;
 
   @override
   $Res call({
@@ -81,9 +83,11 @@ class _$StateCopyWithImpl<$Res> implements $StateCopyWith<$Res> {
   }
 }
 
-abstract class _$StateCopyWith<$Res> implements $StateCopyWith<$Res> {
-  factory _$StateCopyWith(_State value, $Res Function(_State) then) =
-      __$StateCopyWithImpl<$Res>;
+abstract class _$AddRecipeScreenStateCopyWith<$Res>
+    implements $AddRecipeScreenStateCopyWith<$Res> {
+  factory _$AddRecipeScreenStateCopyWith(_AddRecipeScreenState value,
+          $Res Function(_AddRecipeScreenState) then) =
+      __$AddRecipeScreenStateCopyWithImpl<$Res>;
   @override
   $Res call(
       {@nullable String nameError,
@@ -94,13 +98,15 @@ abstract class _$StateCopyWith<$Res> implements $StateCopyWith<$Res> {
   $AsyncValueCopyWith<bool, $Res> get result;
 }
 
-class __$StateCopyWithImpl<$Res> extends _$StateCopyWithImpl<$Res>
-    implements _$StateCopyWith<$Res> {
-  __$StateCopyWithImpl(_State _value, $Res Function(_State) _then)
-      : super(_value, (v) => _then(v as _State));
+class __$AddRecipeScreenStateCopyWithImpl<$Res>
+    extends _$AddRecipeScreenStateCopyWithImpl<$Res>
+    implements _$AddRecipeScreenStateCopyWith<$Res> {
+  __$AddRecipeScreenStateCopyWithImpl(
+      _AddRecipeScreenState _value, $Res Function(_AddRecipeScreenState) _then)
+      : super(_value, (v) => _then(v as _AddRecipeScreenState));
 
   @override
-  _State get _value => super._value as _State;
+  _AddRecipeScreenState get _value => super._value as _AddRecipeScreenState;
 
   @override
   $Res call({
@@ -108,7 +114,7 @@ class __$StateCopyWithImpl<$Res> extends _$StateCopyWithImpl<$Res>
     Object stepsError = freezed,
     Object result = freezed,
   }) {
-    return _then(_State(
+    return _then(_AddRecipeScreenState(
       nameError: nameError == freezed ? _value.nameError : nameError as String,
       stepsError:
           stepsError == freezed ? _value.stepsError : stepsError as String,
@@ -117,8 +123,8 @@ class __$StateCopyWithImpl<$Res> extends _$StateCopyWithImpl<$Res>
   }
 }
 
-class _$_State extends _State {
-  const _$_State(
+class _$_AddRecipeScreenState extends _AddRecipeScreenState {
+  const _$_AddRecipeScreenState(
       {@nullable this.nameError,
       @nullable this.stepsError,
       this.result = const AsyncValue<bool>.data(false)})
@@ -137,13 +143,13 @@ class _$_State extends _State {
 
   @override
   String toString() {
-    return 'State(nameError: $nameError, stepsError: $stepsError, result: $result)';
+    return 'AddRecipeScreenState(nameError: $nameError, stepsError: $stepsError, result: $result)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _State &&
+        (other is _AddRecipeScreenState &&
             (identical(other.nameError, nameError) ||
                 const DeepCollectionEquality()
                     .equals(other.nameError, nameError)) &&
@@ -162,16 +168,17 @@ class _$_State extends _State {
       const DeepCollectionEquality().hash(result);
 
   @override
-  _$StateCopyWith<_State> get copyWith =>
-      __$StateCopyWithImpl<_State>(this, _$identity);
+  _$AddRecipeScreenStateCopyWith<_AddRecipeScreenState> get copyWith =>
+      __$AddRecipeScreenStateCopyWithImpl<_AddRecipeScreenState>(
+          this, _$identity);
 }
 
-abstract class _State extends State {
-  const _State._() : super._();
-  const factory _State(
+abstract class _AddRecipeScreenState extends AddRecipeScreenState {
+  const _AddRecipeScreenState._() : super._();
+  const factory _AddRecipeScreenState(
       {@nullable String nameError,
       @nullable String stepsError,
-      AsyncValue<bool> result}) = _$_State;
+      AsyncValue<bool> result}) = _$_AddRecipeScreenState;
 
   @override
   @nullable
@@ -182,5 +189,5 @@ abstract class _State extends State {
   @override
   AsyncValue<bool> get result;
   @override
-  _$StateCopyWith<_State> get copyWith;
+  _$AddRecipeScreenStateCopyWith<_AddRecipeScreenState> get copyWith;
 }

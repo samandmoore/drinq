@@ -24,7 +24,7 @@ class UserNotifier extends StateNotifier<User> {
   }
 }
 
-final userProvider = StateNotifierProvider((_) => UserNotifier(null));
+// final userProvider = StateNotifierProvider((_) => UserNotifier(null));
 
 @freezed
 abstract class User with _$User {
@@ -32,6 +32,30 @@ abstract class User with _$User {
     @required String name,
   }) = _User;
 }
+
+@freezed
+abstract class AuthState with _$AuthState {
+  factory AuthState({
+    String token,
+  }) = _AuthState;
+
+  @late
+  bool get isLoggedIn => token != null;
+}
+
+class AuthNotifier extends StateNotifier<AuthState> {
+  AuthNotifier() : super(AuthState());
+
+  void storeToken(String token) {
+    state = state.copyWith(token: token);
+  }
+
+  void clearToken() {
+    state = AuthState();
+  }
+}
+
+final authProvider = StateNotifierProvider((_) => AuthNotifier());
 
 final recipesProvider = FutureProvider<List<Recipe>>((ref) {
   final api = ref.read(apiProvider);

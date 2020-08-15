@@ -1,3 +1,4 @@
+import 'package:drinq/utils/space.dart';
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
@@ -8,9 +9,14 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    return Text(
-      text,
-      style: textTheme.headline3,
+    return Column(
+      children: [
+        Text(
+          text,
+          style: textTheme.headline3,
+        ),
+        const VSpace(byFactorOf: 2),
+      ],
     );
   }
 }

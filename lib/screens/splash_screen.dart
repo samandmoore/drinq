@@ -10,8 +10,8 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer((_, read) {
-      final user = read(userProvider.state);
-      if (user != null) {
+      final authState = read(authProvider.state);
+      if (authState.isLoggedIn) {
         return AllRecipesScreen();
       }
 

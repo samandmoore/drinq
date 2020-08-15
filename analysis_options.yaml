@@ -1,0 +1,7 @@
+analyzer:
+  exclude:
+    - "**/*.freezed.dart"
+    - "**/*.g.dart"
+  errors:
+    missing_return: error
+    missing_required_param: error

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:drinq/models/models.dart';
@@ -14,7 +15,16 @@ final apiProvider = Provider<Api>((_) => Api(storage: LocalStorage('data')));
 class Api {
   final LocalStorage _storage;
 
-  const Api({LocalStorage storage}) : _storage = storage;
+  const Api({@required LocalStorage storage}) : _storage = storage;
+
+  Future<String> createLogin({
+    @required String email,
+    @required String password,
+  }) async {
+    // in a real API we'd actually check your creds...
+    final basicAuthEncoded = base64Encode(utf8.encode('$email:$password'));
+    return 'Basic $basicAuthEncoded';
+  }
 
   Future<List<Recipe>> fetchRecipes() async {
     return (await _loadData()).recipes;

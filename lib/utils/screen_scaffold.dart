@@ -7,7 +7,7 @@ class ScreenScaffold extends StatelessWidget {
 
   const ScreenScaffold({
     Key key,
-    @required this.title,
+    this.title,
     @required this.body,
     this.fab,
   }) : super(key: key);
@@ -15,7 +15,7 @@ class ScreenScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: title == null ? null : AppBar(title: Text(title)),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: body,

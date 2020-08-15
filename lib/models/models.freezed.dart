@@ -114,6 +114,124 @@ abstract class _User implements User {
   _$UserCopyWith<_User> get copyWith;
 }
 
+class _$AuthStateTearOff {
+  const _$AuthStateTearOff();
+
+// ignore: unused_element
+  _AuthState call({String token}) {
+    return _AuthState(
+      token: token,
+    );
+  }
+}
+
+// ignore: unused_element
+const $AuthState = _$AuthStateTearOff();
+
+mixin _$AuthState {
+  String get token;
+
+  $AuthStateCopyWith<AuthState> get copyWith;
+}
+
+abstract class $AuthStateCopyWith<$Res> {
+  factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
+      _$AuthStateCopyWithImpl<$Res>;
+  $Res call({String token});
+}
+
+class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
+  _$AuthStateCopyWithImpl(this._value, this._then);
+
+  final AuthState _value;
+  // ignore: unused_field
+  final $Res Function(AuthState) _then;
+
+  @override
+  $Res call({
+    Object token = freezed,
+  }) {
+    return _then(_value.copyWith(
+      token: token == freezed ? _value.token : token as String,
+    ));
+  }
+}
+
+abstract class _$AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
+  factory _$AuthStateCopyWith(
+          _AuthState value, $Res Function(_AuthState) then) =
+      __$AuthStateCopyWithImpl<$Res>;
+  @override
+  $Res call({String token});
+}
+
+class __$AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
+    implements _$AuthStateCopyWith<$Res> {
+  __$AuthStateCopyWithImpl(_AuthState _value, $Res Function(_AuthState) _then)
+      : super(_value, (v) => _then(v as _AuthState));
+
+  @override
+  _AuthState get _value => super._value as _AuthState;
+
+  @override
+  $Res call({
+    Object token = freezed,
+  }) {
+    return _then(_AuthState(
+      token: token == freezed ? _value.token : token as String,
+    ));
+  }
+}
+
+class _$_AuthState implements _AuthState {
+  _$_AuthState({this.token});
+
+  @override
+  final String token;
+
+  bool _didisLoggedIn = false;
+  bool _isLoggedIn;
+
+  @override
+  bool get isLoggedIn {
+    if (_didisLoggedIn == false) {
+      _didisLoggedIn = true;
+      _isLoggedIn = token != null;
+    }
+    return _isLoggedIn;
+  }
+
+  @override
+  String toString() {
+    return 'AuthState(token: $token, isLoggedIn: $isLoggedIn)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _AuthState &&
+            (identical(other.token, token) ||
+                const DeepCollectionEquality().equals(other.token, token)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(token);
+
+  @override
+  _$AuthStateCopyWith<_AuthState> get copyWith =>
+      __$AuthStateCopyWithImpl<_AuthState>(this, _$identity);
+}
+
+abstract class _AuthState implements AuthState {
+  factory _AuthState({String token}) = _$_AuthState;
+
+  @override
+  String get token;
+  @override
+  _$AuthStateCopyWith<_AuthState> get copyWith;
+}
+
 class _$RecipeDraftTearOff {
   const _$RecipeDraftTearOff();
 

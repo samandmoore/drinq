@@ -1,8 +1,8 @@
-import 'package:drinq/models/models.dart';
+import 'package:drinq/models/auth.dart';
+import 'package:drinq/models/recipe.dart';
 import 'package:drinq/screens/add_recipe_screen.dart';
 import 'package:drinq/screens/view_recipe_screen.dart';
 import 'package:drinq/utils/body_text.dart';
-import 'package:drinq/utils/header.dart';
 import 'package:drinq/utils/nav.dart';
 import 'package:drinq/utils/screen_scaffold.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,6 @@ class AllRecipesScreen extends StatelessWidget {
         onRefresh: () => context.refresh(recipesProvider),
         child: ListView(
           children: [
-            Header('recipes'),
             RecipeList(),
             OutlineButton(
               child: Text('log out'),

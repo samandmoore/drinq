@@ -1,5 +1,5 @@
 import 'package:drinq/models/api.dart';
-import 'package:drinq/models/models.dart';
+import 'package:drinq/models/recipe.dart';
 import 'package:drinq/screens/edit_recipe_screen.dart';
 import 'package:drinq/utils/body_text.dart';
 import 'package:drinq/utils/header.dart';

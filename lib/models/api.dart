@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:drinq/models/models.dart';
+import 'package:drinq/models/recipe.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:localstorage/localstorage.dart';
@@ -22,6 +22,14 @@ class Api {
     @required String password,
   }) async {
     // in a real API we'd actually check your creds...
+    final basicAuthEncoded = base64Encode(utf8.encode('$email:$password'));
+    return 'Basic $basicAuthEncoded';
+  }
+
+  Future<String> createUser({
+    @required String email,
+    @required String password,
+  }) async {
     final basicAuthEncoded = base64Encode(utf8.encode('$email:$password'));
     return 'Basic $basicAuthEncoded';
   }

@@ -1,4 +1,5 @@
 import 'package:drinq/screens/splash_screen.dart';
+import 'package:drinq/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,10 +13,7 @@ class App extends StatelessWidget {
     return ProviderScope(
       child: MaterialApp(
         title: 'drinq',
-        theme: ThemeData(
-          primarySwatch: Colors.green,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
+        theme: AppTheme.build(),
         home: SplashScreen(),
       ),
     );

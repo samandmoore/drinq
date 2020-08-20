@@ -120,7 +120,7 @@ class RecipeListRow extends StatelessWidget {
           title: BodyText(recipe.name),
           onTap: () {
             context.read(currentRecipeIdProvider).state = recipe.id;
-            Nav.of(context).pushScreen(
+            Nav.of(context).pushScreen<void>(
               (_) => const ViewRecipeScreen(),
             );
           },

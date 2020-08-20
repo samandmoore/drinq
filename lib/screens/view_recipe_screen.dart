@@ -53,7 +53,7 @@ class _RecipeDataView extends StatelessWidget {
           builder: (context) => OutlineButton(
             onPressed: () async {
               final edited = await Nav.of(context)
-                  .presentScreen((_) => EditRecipeScreen(recipe: recipe));
+                  .presentScreen<bool>((_) => EditRecipeScreen(recipe: recipe));
               if (edited == true) {
                 Scaffold.of(context)
                   ..hideCurrentSnackBar()
@@ -65,7 +65,7 @@ class _RecipeDataView extends StatelessWidget {
         ),
         OutlineButton(
           onPressed: () {
-            showModalBottomSheet(
+            showModalBottomSheet<void>(
               context: context,
               builder: (bottomSheetContext) {
                 return _DeleteSheet(recipe: recipe);

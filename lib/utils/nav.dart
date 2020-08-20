@@ -9,7 +9,8 @@ class Nav {
     return Nav(Navigator.of(context, rootNavigator: root));
   }
 
-  Future<T> presentScreen<T>(WidgetBuilder builder) async {
+  @optionalTypeArgs
+  Future<T> presentScreen<T extends Object>(WidgetBuilder builder) async {
     return navigator.push(
       MaterialPageRoute(
         builder: builder,
@@ -18,11 +19,13 @@ class Nav {
     );
   }
 
-  Future<T> pushScreen<T>(WidgetBuilder builder) async {
+  @optionalTypeArgs
+  Future<T> pushScreen<T extends Object>(WidgetBuilder builder) async {
     return navigator.push(MaterialPageRoute(builder: builder));
   }
 
-  void pop<T>([T result]) {
+  @optionalTypeArgs
+  void pop<T extends Object>([T result]) {
     return navigator.pop(result);
   }
 }

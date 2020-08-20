@@ -75,7 +75,7 @@ class AddRecipeScreen extends HookWidget {
     final stepController = useTextEditingController();
     final state = useProvider(addRecipeScreenNotifierProvider.state);
 
-    return ProviderListener(
+    return ProviderListener<AddRecipeScreenState>(
       onChange: (state) {
         if (state.result.data?.value ?? false) {
           Nav.of(context).pop(true);

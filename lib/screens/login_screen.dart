@@ -35,7 +35,10 @@ class LoginScreen extends HookWidget {
                 labelText: 'Email',
                 errorText: state.emailError,
               ),
-              autofillHints: [AutofillHints.username, AutofillHints.email],
+              autofillHints: const [
+                AutofillHints.username,
+                AutofillHints.email,
+              ],
             ),
             TextField(
               controller: passwordController,
@@ -44,23 +47,23 @@ class LoginScreen extends HookWidget {
                 errorText: state.passwordError,
               ),
               obscureText: true,
-              autofillHints: [AutofillHints.password],
+              autofillHints: const [AutofillHints.password],
             ),
             HStretch(
               child: OutlineButton(
-                child: Text('log in'),
                 onPressed: () =>
                     context.read(loginScreenNotifierProvider).login(
                           email: emailController.text,
                           password: passwordController.text,
                         ),
+                child: const Text('log in'),
               ),
             ),
             HStretch(
               child: FlatButton(
-                child: Text('sign up'),
                 onPressed: () =>
-                    Nav.of(context).presentScreen((_) => SignupScreen()),
+                    Nav.of(context).presentScreen((_) => const SignupScreen()),
+                child: const Text('sign up'),
               ),
             )
           ]),
@@ -95,7 +98,7 @@ class LoginScreenNotifier extends StateNotifier<LoginScreenState> {
   LoginScreenNotifier({
     @required this.api,
     @required this.auth,
-  }) : super(LoginScreenState());
+  }) : super(const LoginScreenState());
 
   Future<void> login({
     @required String email,
@@ -108,7 +111,7 @@ class LoginScreenNotifier extends StateNotifier<LoginScreenState> {
 
     if (state.hasErrors()) return;
 
-    state = state.copyWith(result: AsyncValue.loading());
+    state = state.copyWith(result: const AsyncValue.loading());
     state = state.copyWith(
       result: await AsyncValue.guard(() async {
         final token = await api.createLogin(email: email, password: password);

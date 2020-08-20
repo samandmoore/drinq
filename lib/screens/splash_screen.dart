@@ -14,9 +14,9 @@ class SplashScreen extends HookWidget {
     final auth = useProvider(authProvider.state);
 
     return auth.when(
-      authenticated: (_) => AllRecipesScreen(),
-      unauthenticated: () => LoginScreen(),
-      loading: () => ScreenScaffold(
+      authenticated: (_) => const AllRecipesScreen(),
+      unauthenticated: () => const LoginScreen(),
+      loading: () => const ScreenScaffold(
         body: Center(child: CircularProgressIndicator()),
       ),
     );

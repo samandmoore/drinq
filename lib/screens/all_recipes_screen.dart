@@ -19,26 +19,26 @@ class AllRecipesScreen extends StatelessWidget {
         onRefresh: () => context.refresh(recipesProvider),
         child: ListView(
           children: [
-            RecipeList(),
+            const RecipeList(),
             OutlineButton(
-              child: Text('log out'),
               onPressed: () => context.read(authProvider).clearToken(),
+              child: const Text('log out'),
             )
           ],
         ),
       ),
       fab: Builder(builder: (context) {
         return FloatingActionButton(
-          child: Icon(Icons.add),
           onPressed: () async {
             final recipeAdded = await Nav.of(context)
-                .presentScreen<bool>((_) => AddRecipeScreen());
+                .presentScreen<bool>((_) => const AddRecipeScreen());
             if (recipeAdded == true) {
               Scaffold.of(context)
                 ..hideCurrentSnackBar()
-                ..showSnackBar(SnackBar(content: Text('Recipe added!')));
+                ..showSnackBar(const SnackBar(content: Text('Recipe added!')));
             }
           },
+          child: const Icon(Icons.add),
         );
       }),
     );
@@ -58,7 +58,7 @@ class RecipeList extends StatelessWidget {
       return recipes.when(
         data: (data) {
           if (data.isEmpty) {
-            return Empty();
+            return const Empty();
           }
           return ListView.builder(
             shrinkWrap: true,
@@ -73,7 +73,7 @@ class RecipeList extends StatelessWidget {
           );
         },
         loading: () {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         },
         error: (e, __) {
           return Center(
@@ -81,8 +81,8 @@ class RecipeList extends StatelessWidget {
               children: [
                 Text(e.toString()),
                 OutlineButton(
-                  child: Text('Retry'),
                   onPressed: () => context.refresh(recipesProvider),
+                  child: const Text('Retry'),
                 )
               ],
             ),
@@ -98,7 +98,7 @@ class Empty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BodyText('No recipes yet, add one!');
+    return const BodyText('No recipes yet, add one!');
   }
 }
 
@@ -121,12 +121,12 @@ class RecipeListRow extends StatelessWidget {
           onTap: () {
             context.read(currentRecipeIdProvider).state = recipe.id;
             Nav.of(context).pushScreen(
-              (_) => ViewRecipeScreen(),
+              (_) => const ViewRecipeScreen(),
             );
           },
-          trailing: Icon(Icons.navigate_next),
+          trailing: const Icon(Icons.navigate_next),
         ),
-        Divider(),
+        const Divider(),
       ],
     );
   }

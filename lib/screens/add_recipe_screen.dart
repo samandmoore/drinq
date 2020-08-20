@@ -38,7 +38,7 @@ class AddRecipeScreenNotifier extends StateNotifier<AddRecipeScreenState> {
   AddRecipeScreenNotifier({
     @required this.api,
     @required this.refreshRecipes,
-  }) : super(AddRecipeScreenState());
+  }) : super(const AddRecipeScreenState());
 
   Future<void> createRecipe(RecipeDraft draft) async {
     state = state.copyWith(
@@ -48,7 +48,7 @@ class AddRecipeScreenNotifier extends StateNotifier<AddRecipeScreenState> {
 
     if (state.hasErrors()) return;
 
-    state = state.copyWith(result: AsyncValue.loading());
+    state = state.copyWith(result: const AsyncValue.loading());
     state = state.copyWith(
       result: await AsyncValue.guard(() async {
         await api.createRecipe(draft);
@@ -76,9 +76,9 @@ class AddRecipeScreen extends HookWidget {
     final state = useProvider(addRecipeScreenNotifierProvider.state);
 
     return ProviderListener(
-      onChange: (AddRecipeScreenState state) {
+      onChange: (state) {
         if (state.result.data?.value ?? false) {
-          Nav.of(context)..pop(true);
+          Nav.of(context).pop(true);
         }
       },
       provider: addRecipeScreenNotifierProvider.state,
@@ -95,7 +95,7 @@ class AddRecipeScreen extends HookWidget {
                     errorText: state.nameError,
                   ),
                 ),
-                VSpace(byFactorOf: 2),
+                const VSpace(byFactorOf: 2),
                 TextField(
                   controller: stepController,
                   maxLines: null,
@@ -105,7 +105,6 @@ class AddRecipeScreen extends HookWidget {
                   ),
                 ),
                 OutlineButton(
-                  child: Text('save'),
                   onPressed: () async {
                     context.read(addRecipeScreenNotifierProvider).createRecipe(
                           RecipeDraft(
@@ -118,7 +117,7 @@ class AddRecipeScreen extends HookWidget {
               ],
             );
           },
-          loading: () => Center(child: CircularProgressIndicator()),
+          loading: () => const Center(child: CircularProgressIndicator()),
           error: (e, __) => Center(child: Text(e.toString())),
         ),
       ),

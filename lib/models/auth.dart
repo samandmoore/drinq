@@ -26,7 +26,7 @@ class AuthNotifier extends StateNotifier<Auth> {
 
   final FlutterSecureStorage storage;
 
-  AuthNotifier({@required this.storage}) : super(Auth.loading()) {
+  AuthNotifier({@required this.storage}) : super(const Auth.loading()) {
     _loadInitialValue();
   }
 
@@ -37,7 +37,7 @@ class AuthNotifier extends StateNotifier<Auth> {
 
   Future<void> clearToken() async {
     await storage.delete(key: drinqAuthTokenStorageKey);
-    state = Auth.unauthenticated();
+    state = const Auth.unauthenticated();
   }
 
   Future<void> _loadInitialValue() async {
@@ -45,7 +45,7 @@ class AuthNotifier extends StateNotifier<Auth> {
     if (tokenFromStorage != null) {
       state = Auth.authenticated(token: tokenFromStorage);
     } else {
-      state = Auth.unauthenticated();
+      state = const Auth.unauthenticated();
     }
   }
 }

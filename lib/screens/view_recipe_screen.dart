@@ -28,7 +28,7 @@ class ViewRecipeScreen extends HookWidget {
           return _RecipeDataView(recipe: data);
         },
         loading: () {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         },
         error: (e, __) {
           return Center(child: Text(e.toString()));
@@ -51,20 +51,19 @@ class _RecipeDataView extends StatelessWidget {
         BodyText(recipe.toString()),
         Builder(
           builder: (context) => OutlineButton(
-            child: Text('edit'),
             onPressed: () async {
               final edited = await Nav.of(context)
                   .presentScreen((_) => EditRecipeScreen(recipe: recipe));
               if (edited == true) {
                 Scaffold.of(context)
                   ..hideCurrentSnackBar()
-                  ..showSnackBar(SnackBar(content: Text('Recipe updated!')));
+                  ..showSnackBar(
+                      const SnackBar(content: Text('Recipe updated!')));
               }
             },
           ),
         ),
         OutlineButton(
-          child: Text('delete'),
           onPressed: () {
             showModalBottomSheet(
               context: context,
@@ -73,6 +72,7 @@ class _RecipeDataView extends StatelessWidget {
               },
             );
           },
+          child: const Text('delete'),
         ),
       ],
     );
@@ -86,7 +86,7 @@ class DeleteRecipeNotifier extends StateNotifier<AsyncValue<bool>> {
   DeleteRecipeNotifier({
     @required this.api,
     @required this.refreshRecipes,
-  }) : super(AsyncValue.data(false));
+  }) : super(const AsyncValue.data(false));
 
   Future<void> deleteRecipe(String id) async {
     state = const AsyncValue.loading();
@@ -115,8 +115,8 @@ class _DeleteSheet extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProviderListener(
-      onChange: (AsyncValue<bool> result) {
+    return ProviderListener<AsyncValue<bool>>(
+      onChange: (result) {
         if (result.data?.value ?? false) {
           Nav.of(context)..pop()..pop();
         }
@@ -124,7 +124,7 @@ class _DeleteSheet extends HookWidget {
       provider: deleteRecipeProvider.state,
       child: useProvider(deleteRecipeProvider.state).when(
         data: (_) => _ConfirmDelete(recipe: recipe),
-        loading: () => Center(child: CircularProgressIndicator()),
+        loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, __) => Center(child: Text(e.toString())),
       ),
     );
@@ -143,23 +143,23 @@ class _ConfirmDelete extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BodyText(
+        const BodyText(
           'are you sure you want to delete this recipe?',
         ),
         HStretch(
           child: OutlineButton(
-            child: Text('yes'),
             onPressed: () {
               context.read(deleteRecipeProvider).deleteRecipe(recipe.id);
             },
+            child: const Text('yes'),
           ),
         ),
         HStretch(
           child: OutlineButton(
-            child: Text('no'),
             onPressed: () {
               Nav.of(context).pop();
             },
+            child: const Text('no'),
           ),
         ),
       ],

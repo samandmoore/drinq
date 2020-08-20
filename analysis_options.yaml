@@ -1,3 +1,4 @@
+include: package:nitpicky/analysis_options.yaml
 analyzer:
   exclude:
     - "**/*.freezed.dart"
@@ -5,3 +6,17 @@ analyzer:
   errors:
     missing_return: error
     missing_required_param: error
+linter:
+  rules:
+    prefer_is_empty: true
+    prefer_is_not_empty: true
+    sort_child_properties_last: true
+    unnecessary_this: true
+    recursive_getters: true
+    one_member_abstracts: false
+    constant_identifier_names: false
+    non_constant_identifier_names: false
+    avoid_function_literals_in_foreach_calls: false
+    type_annotate_public_apis: false
+    unawaited_futures: false
+    sort_unnamed_constructors_first: false

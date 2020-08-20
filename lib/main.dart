@@ -15,7 +15,7 @@ class App extends StatelessWidget {
       child: MaterialApp(
         title: 'drinq',
         theme: AppTheme.build(),
-        home: SplashScreen(),
+        home: const SplashScreen(),
       ),
     );
   }

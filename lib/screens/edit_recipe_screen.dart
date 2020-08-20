@@ -28,14 +28,13 @@ class EditRecipeScreen extends HookWidget {
               labelText: 'What\'s this drink called?',
             ),
           ),
-          VSpace(byFactorOf: 2),
-          BodyText('Steps'),
+          const VSpace(byFactorOf: 2),
+          const BodyText('Steps'),
           TextField(
             controller: stepController,
             maxLines: null,
           ),
           OutlineButton(
-            child: Text('save'),
             onPressed: () async {
               await context.read(apiProvider).updateRecipe(
                     recipe.id,
@@ -47,6 +46,7 @@ class EditRecipeScreen extends HookWidget {
               context.refresh(recipesProvider);
               Nav.of(context).pop(true);
             },
+            child: const Text('save'),
           ),
         ],
       ),

@@ -7,6 +7,6 @@ class HStretch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(child: child, width: double.infinity);
+    return SizedBox(width: double.infinity, child: child);
   }
 }

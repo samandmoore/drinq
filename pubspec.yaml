@@ -26,6 +26,10 @@ dev_dependencies:
   freezed: any
   json_serializable: any
   build_runner: any
+  nitpicky:
+    git:
+      url: https://github.com/VGVentures/nitpicky
+      ref: 1.0.2
 
 flutter:
   uses-material-design: true

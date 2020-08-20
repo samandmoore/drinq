@@ -82,7 +82,9 @@ class Api {
     await Future.delayed(Duration(milliseconds: Random().nextInt(2000)));
 
     final Map<String, dynamic> data = _storage.getItem('recipes');
-    return data == null ? RecipeData(recipes: []) : RecipeData.fromJson(data);
+    return data == null
+        ? const RecipeData(recipes: [])
+        : RecipeData.fromJson(data);
   }
 
   Future<void> _saveData(RecipeData data) async {

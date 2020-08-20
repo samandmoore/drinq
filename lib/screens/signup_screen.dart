@@ -35,7 +35,10 @@ class SignupScreen extends HookWidget {
                 labelText: 'Email',
                 errorText: state.emailError,
               ),
-              autofillHints: [AutofillHints.username, AutofillHints.email],
+              autofillHints: const [
+                AutofillHints.username,
+                AutofillHints.email,
+              ],
             ),
             TextField(
               controller: passwordController,
@@ -44,7 +47,7 @@ class SignupScreen extends HookWidget {
                 errorText: state.passwordError,
               ),
               obscureText: true,
-              autofillHints: [AutofillHints.newPassword],
+              autofillHints: const [AutofillHints.newPassword],
             ),
             TextField(
               controller: confirmPasswordController,
@@ -53,11 +56,10 @@ class SignupScreen extends HookWidget {
                 errorText: state.confirmPasswordError,
               ),
               obscureText: true,
-              autofillHints: [AutofillHints.newPassword],
+              autofillHints: const [AutofillHints.newPassword],
             ),
             HStretch(
               child: OutlineButton(
-                child: Text('sign up'),
                 onPressed: () async {
                   final result =
                       await context.read(signupScreenNotifierProvider).signup(
@@ -67,6 +69,7 @@ class SignupScreen extends HookWidget {
                           );
                   if (result) Nav.of(context).pop();
                 },
+                child: const Text('sign up'),
               ),
             )
           ]),
@@ -103,7 +106,7 @@ class SignupScreenNotifier extends StateNotifier<SignupScreenState> {
   SignupScreenNotifier({
     @required this.api,
     @required this.auth,
-  }) : super(SignupScreenState());
+  }) : super(const SignupScreenState());
 
   Future<bool> signup({
     @required String email,
@@ -125,7 +128,7 @@ class SignupScreenNotifier extends StateNotifier<SignupScreenState> {
 
     if (state.hasErrors()) return false;
 
-    state = state.copyWith(result: AsyncValue.loading());
+    state = state.copyWith(result: const AsyncValue.loading());
     state = state.copyWith(
       result: await AsyncValue.guard(() async {
         final token = await api.createUser(email: email, password: password);

@@ -1,33 +1,33 @@
 name: drinq
-description: A new Flutter project.
+description: A cocktail recipe app
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.9.0 <3.0.0"
+  flutter: 1.20.2
 
 dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^0.1.3
-  flutter_hooks: any
-  state_notifier: any
+  flutter_hooks: ^0.13.1
+  state_notifier: ^0.6.0
   hooks_riverpod: ^0.6.1
-  freezed_annotation: any
-  uuid: any
-  localstorage: any
-  flutter_secure_storage: any
+  freezed_annotation: ^0.11.0+1
+  uuid: ^2.2.0
+  localstorage: ^3.0.2+5
+  flutter_secure_storage: ^3.3.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  freezed: any
-  json_serializable: any
-  build_runner: any
+  freezed: ^0.11.5
+  json_serializable: ^3.4.0
+  build_runner: ^1.10.1
   lint: ^1.0.0
-
 
 flutter:
   uses-material-design: true

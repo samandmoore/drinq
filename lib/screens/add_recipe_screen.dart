@@ -14,14 +14,14 @@ import 'package:state_notifier/state_notifier.dart';
 part 'add_recipe_screen.freezed.dart';
 
 @freezed
-abstract class AddRecipeScreenState implements _$AddRecipeScreenState {
-  const AddRecipeScreenState._();
+abstract class AddRecipeState implements _$AddRecipeState {
+  const AddRecipeState._();
 
-  const factory AddRecipeScreenState({
+  const factory AddRecipeState({
     @nullable String nameError,
     @nullable String stepsError,
     @Default(AsyncValue<bool>.data(false)) AsyncValue<bool> result,
-  }) = _AddRecipeScreenState;
+  }) = _AddRecipeState;
 
   bool hasErrors() {
     return [
@@ -31,14 +31,14 @@ abstract class AddRecipeScreenState implements _$AddRecipeScreenState {
   }
 }
 
-class AddRecipeScreenNotifier extends StateNotifier<AddRecipeScreenState> {
+class AddRecipeModel extends StateNotifier<AddRecipeState> {
   final Api api;
   final VoidCallback refreshRecipes;
 
-  AddRecipeScreenNotifier({
+  AddRecipeModel({
     @required this.api,
     @required this.refreshRecipes,
-  }) : super(const AddRecipeScreenState());
+  }) : super(const AddRecipeState());
 
   Future<void> createRecipe(RecipeDraft draft) async {
     state = state.copyWith(
@@ -59,8 +59,8 @@ class AddRecipeScreenNotifier extends StateNotifier<AddRecipeScreenState> {
   }
 }
 
-final addRecipeScreenNotifierProvider = StateNotifierProvider.autoDispose(
-  (ref) => AddRecipeScreenNotifier(
+final addRecipeModelProvider = StateNotifierProvider.autoDispose(
+  (ref) => AddRecipeModel(
     api: ref.read(apiProvider),
     refreshRecipes: () => ref.container.refresh(recipesProvider),
   ),
@@ -73,15 +73,15 @@ class AddRecipeScreen extends HookWidget {
   Widget build(BuildContext context) {
     final nameController = useTextEditingController();
     final stepController = useTextEditingController();
-    final state = useProvider(addRecipeScreenNotifierProvider.state);
+    final state = useProvider(addRecipeModelProvider.state);
 
-    return ProviderListener<AddRecipeScreenState>(
+    return ProviderListener<AddRecipeState>(
       onChange: (state) {
         if (state.result.data?.value ?? false) {
           Nav.of(context).pop(true);
         }
       },
-      provider: addRecipeScreenNotifierProvider.state,
+      provider: addRecipeModelProvider.state,
       child: ScreenScaffold(
         title: 'Add recipe',
         body: state.result.when(
@@ -106,7 +106,7 @@ class AddRecipeScreen extends HookWidget {
                 ),
                 OutlineButton(
                   onPressed: () async {
-                    context.read(addRecipeScreenNotifierProvider).createRecipe(
+                    context.read(addRecipeModelProvider).createRecipe(
                           RecipeDraft(
                             name: nameController.value.text,
                             steps: stepController.value.text,

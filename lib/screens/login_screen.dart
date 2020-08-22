@@ -22,7 +22,7 @@ class LoginScreen extends HookWidget {
   Widget build(BuildContext context) {
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
-    final state = useProvider(loginScreenNotifierProvider.state);
+    final state = useProvider(loginModelProvider.state);
 
     return ScreenScaffold(
       title: 'Log in',
@@ -51,11 +51,10 @@ class LoginScreen extends HookWidget {
             ),
             HStretch(
               child: OutlineButton(
-                onPressed: () =>
-                    context.read(loginScreenNotifierProvider).login(
-                          email: emailController.text,
-                          password: passwordController.text,
-                        ),
+                onPressed: () => context.read(loginModelProvider).login(
+                      email: emailController.text,
+                      password: passwordController.text,
+                    ),
                 child: const Text('log in'),
               ),
             ),
@@ -74,14 +73,14 @@ class LoginScreen extends HookWidget {
 }
 
 @freezed
-abstract class LoginScreenState implements _$LoginScreenState {
-  const LoginScreenState._();
+abstract class LoginState implements _$LoginState {
+  const LoginState._();
 
-  const factory LoginScreenState({
+  const factory LoginState({
     @nullable String emailError,
     @nullable String passwordError,
     @Default(AsyncValue<bool>.data(false)) AsyncValue<bool> result,
-  }) = _LoginScreenState;
+  }) = _LoginState;
 
   bool hasErrors() {
     return [
@@ -91,14 +90,14 @@ abstract class LoginScreenState implements _$LoginScreenState {
   }
 }
 
-class LoginScreenNotifier extends StateNotifier<LoginScreenState> {
+class LoginModel extends StateNotifier<LoginState> {
   final Api api;
   final AuthNotifier auth;
 
-  LoginScreenNotifier({
+  LoginModel({
     @required this.api,
     @required this.auth,
-  }) : super(const LoginScreenState());
+  }) : super(const LoginState());
 
   Future<void> login({
     @required String email,
@@ -122,8 +121,8 @@ class LoginScreenNotifier extends StateNotifier<LoginScreenState> {
   }
 }
 
-final loginScreenNotifierProvider = StateNotifierProvider.autoDispose(
-  (ref) => LoginScreenNotifier(
+final loginModelProvider = StateNotifierProvider.autoDispose(
+  (ref) => LoginModel(
     api: ref.read(apiProvider),
     auth: ref.read(authProvider),
   ),

@@ -22,7 +22,7 @@ class SignupScreen extends HookWidget {
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
     final confirmPasswordController = useTextEditingController();
-    final state = useProvider(signupScreenNotifierProvider.state);
+    final state = useProvider(signupModelProvider.state);
 
     return ScreenScaffold(
       title: 'Sign up',
@@ -61,12 +61,11 @@ class SignupScreen extends HookWidget {
             HStretch(
               child: OutlineButton(
                 onPressed: () async {
-                  final result =
-                      await context.read(signupScreenNotifierProvider).signup(
-                            email: emailController.text,
-                            password: passwordController.text,
-                            confirmPassword: confirmPasswordController.text,
-                          );
+                  final result = await context.read(signupModelProvider).save(
+                        email: emailController.text,
+                        password: passwordController.text,
+                        confirmPassword: confirmPasswordController.text,
+                      );
                   if (result) Nav.of(context).pop();
                 },
                 child: const Text('sign up'),
@@ -80,15 +79,15 @@ class SignupScreen extends HookWidget {
 }
 
 @freezed
-abstract class SignupScreenState implements _$SignupScreenState {
-  const SignupScreenState._();
+abstract class SignupState implements _$SignupState {
+  const SignupState._();
 
-  const factory SignupScreenState({
+  const factory SignupState({
     @nullable String emailError,
     @nullable String passwordError,
     @nullable String confirmPasswordError,
     @Default(AsyncValue<bool>.data(false)) AsyncValue<bool> result,
-  }) = _SignupScreenState;
+  }) = _SignupState;
 
   bool hasErrors() {
     return [
@@ -99,16 +98,16 @@ abstract class SignupScreenState implements _$SignupScreenState {
   }
 }
 
-class SignupScreenNotifier extends StateNotifier<SignupScreenState> {
+class SignupModel extends StateNotifier<SignupState> {
   final Api api;
   final AuthNotifier auth;
 
-  SignupScreenNotifier({
+  SignupModel({
     @required this.api,
     @required this.auth,
-  }) : super(const SignupScreenState());
+  }) : super(const SignupState());
 
-  Future<bool> signup({
+  Future<bool> save({
     @required String email,
     @required String password,
     @required String confirmPassword,
@@ -141,8 +140,8 @@ class SignupScreenNotifier extends StateNotifier<SignupScreenState> {
   }
 }
 
-final signupScreenNotifierProvider = StateNotifierProvider.autoDispose(
-  (ref) => SignupScreenNotifier(
+final signupModelProvider = StateNotifierProvider.autoDispose(
+  (ref) => SignupModel(
     api: ref.read(apiProvider),
     auth: ref.read(authProvider),
   ),

@@ -9,15 +9,15 @@ part of 'login_screen.dart';
 
 T _$identity<T>(T value) => value;
 
-class _$LoginScreenStateTearOff {
-  const _$LoginScreenStateTearOff();
+class _$LoginStateTearOff {
+  const _$LoginStateTearOff();
 
 // ignore: unused_element
-  _LoginScreenState call(
+  _LoginState call(
       {@nullable String emailError,
       @nullable String passwordError,
       AsyncValue<bool> result = const AsyncValue<bool>.data(false)}) {
-    return _LoginScreenState(
+    return _LoginState(
       emailError: emailError,
       passwordError: passwordError,
       result: result,
@@ -26,22 +26,22 @@ class _$LoginScreenStateTearOff {
 }
 
 // ignore: unused_element
-const $LoginScreenState = _$LoginScreenStateTearOff();
+const $LoginState = _$LoginStateTearOff();
 
-mixin _$LoginScreenState {
+mixin _$LoginState {
   @nullable
   String get emailError;
   @nullable
   String get passwordError;
   AsyncValue<bool> get result;
 
-  $LoginScreenStateCopyWith<LoginScreenState> get copyWith;
+  $LoginStateCopyWith<LoginState> get copyWith;
 }
 
-abstract class $LoginScreenStateCopyWith<$Res> {
-  factory $LoginScreenStateCopyWith(
-          LoginScreenState value, $Res Function(LoginScreenState) then) =
-      _$LoginScreenStateCopyWithImpl<$Res>;
+abstract class $LoginStateCopyWith<$Res> {
+  factory $LoginStateCopyWith(
+          LoginState value, $Res Function(LoginState) then) =
+      _$LoginStateCopyWithImpl<$Res>;
   $Res call(
       {@nullable String emailError,
       @nullable String passwordError,
@@ -50,13 +50,12 @@ abstract class $LoginScreenStateCopyWith<$Res> {
   $AsyncValueCopyWith<bool, $Res> get result;
 }
 
-class _$LoginScreenStateCopyWithImpl<$Res>
-    implements $LoginScreenStateCopyWith<$Res> {
-  _$LoginScreenStateCopyWithImpl(this._value, this._then);
+class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
+  _$LoginStateCopyWithImpl(this._value, this._then);
 
-  final LoginScreenState _value;
+  final LoginState _value;
   // ignore: unused_field
-  final $Res Function(LoginScreenState) _then;
+  final $Res Function(LoginState) _then;
 
   @override
   $Res call({
@@ -85,11 +84,10 @@ class _$LoginScreenStateCopyWithImpl<$Res>
   }
 }
 
-abstract class _$LoginScreenStateCopyWith<$Res>
-    implements $LoginScreenStateCopyWith<$Res> {
-  factory _$LoginScreenStateCopyWith(
-          _LoginScreenState value, $Res Function(_LoginScreenState) then) =
-      __$LoginScreenStateCopyWithImpl<$Res>;
+abstract class _$LoginStateCopyWith<$Res> implements $LoginStateCopyWith<$Res> {
+  factory _$LoginStateCopyWith(
+          _LoginState value, $Res Function(_LoginState) then) =
+      __$LoginStateCopyWithImpl<$Res>;
   @override
   $Res call(
       {@nullable String emailError,
@@ -100,15 +98,14 @@ abstract class _$LoginScreenStateCopyWith<$Res>
   $AsyncValueCopyWith<bool, $Res> get result;
 }
 
-class __$LoginScreenStateCopyWithImpl<$Res>
-    extends _$LoginScreenStateCopyWithImpl<$Res>
-    implements _$LoginScreenStateCopyWith<$Res> {
-  __$LoginScreenStateCopyWithImpl(
-      _LoginScreenState _value, $Res Function(_LoginScreenState) _then)
-      : super(_value, (v) => _then(v as _LoginScreenState));
+class __$LoginStateCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
+    implements _$LoginStateCopyWith<$Res> {
+  __$LoginStateCopyWithImpl(
+      _LoginState _value, $Res Function(_LoginState) _then)
+      : super(_value, (v) => _then(v as _LoginState));
 
   @override
-  _LoginScreenState get _value => super._value as _LoginScreenState;
+  _LoginState get _value => super._value as _LoginState;
 
   @override
   $Res call({
@@ -116,7 +113,7 @@ class __$LoginScreenStateCopyWithImpl<$Res>
     Object passwordError = freezed,
     Object result = freezed,
   }) {
-    return _then(_LoginScreenState(
+    return _then(_LoginState(
       emailError:
           emailError == freezed ? _value.emailError : emailError as String,
       passwordError: passwordError == freezed
@@ -127,8 +124,8 @@ class __$LoginScreenStateCopyWithImpl<$Res>
   }
 }
 
-class _$_LoginScreenState extends _LoginScreenState {
-  const _$_LoginScreenState(
+class _$_LoginState extends _LoginState {
+  const _$_LoginState(
       {@nullable this.emailError,
       @nullable this.passwordError,
       this.result = const AsyncValue<bool>.data(false)})
@@ -147,13 +144,13 @@ class _$_LoginScreenState extends _LoginScreenState {
 
   @override
   String toString() {
-    return 'LoginScreenState(emailError: $emailError, passwordError: $passwordError, result: $result)';
+    return 'LoginState(emailError: $emailError, passwordError: $passwordError, result: $result)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _LoginScreenState &&
+        (other is _LoginState &&
             (identical(other.emailError, emailError) ||
                 const DeepCollectionEquality()
                     .equals(other.emailError, emailError)) &&
@@ -172,16 +169,16 @@ class _$_LoginScreenState extends _LoginScreenState {
       const DeepCollectionEquality().hash(result);
 
   @override
-  _$LoginScreenStateCopyWith<_LoginScreenState> get copyWith =>
-      __$LoginScreenStateCopyWithImpl<_LoginScreenState>(this, _$identity);
+  _$LoginStateCopyWith<_LoginState> get copyWith =>
+      __$LoginStateCopyWithImpl<_LoginState>(this, _$identity);
 }
 
-abstract class _LoginScreenState extends LoginScreenState {
-  const _LoginScreenState._() : super._();
-  const factory _LoginScreenState(
+abstract class _LoginState extends LoginState {
+  const _LoginState._() : super._();
+  const factory _LoginState(
       {@nullable String emailError,
       @nullable String passwordError,
-      AsyncValue<bool> result}) = _$_LoginScreenState;
+      AsyncValue<bool> result}) = _$_LoginState;
 
   @override
   @nullable
@@ -192,5 +189,5 @@ abstract class _LoginScreenState extends LoginScreenState {
   @override
   AsyncValue<bool> get result;
   @override
-  _$LoginScreenStateCopyWith<_LoginScreenState> get copyWith;
+  _$LoginStateCopyWith<_LoginState> get copyWith;
 }

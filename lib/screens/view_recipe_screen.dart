@@ -79,11 +79,11 @@ class _RecipeDataView extends StatelessWidget {
   }
 }
 
-class DeleteRecipeNotifier extends StateNotifier<AsyncValue<bool>> {
+class DeleteRecipeModel extends StateNotifier<AsyncValue<bool>> {
   final Api api;
   final VoidCallback refreshRecipes;
 
-  DeleteRecipeNotifier({
+  DeleteRecipeModel({
     @required this.api,
     @required this.refreshRecipes,
   }) : super(const AsyncValue.data(false));
@@ -99,7 +99,7 @@ class DeleteRecipeNotifier extends StateNotifier<AsyncValue<bool>> {
 }
 
 final deleteRecipeProvider = StateNotifierProvider.autoDispose(
-  (ref) => DeleteRecipeNotifier(
+  (ref) => DeleteRecipeModel(
     api: ref.read(apiProvider),
     refreshRecipes: () => ref.container.refresh(recipesProvider),
   ),

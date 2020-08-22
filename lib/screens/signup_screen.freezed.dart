@@ -9,16 +9,16 @@ part of 'signup_screen.dart';
 
 T _$identity<T>(T value) => value;
 
-class _$SignupScreenStateTearOff {
-  const _$SignupScreenStateTearOff();
+class _$SignupStateTearOff {
+  const _$SignupStateTearOff();
 
 // ignore: unused_element
-  _SignupScreenState call(
+  _SignupState call(
       {@nullable String emailError,
       @nullable String passwordError,
       @nullable String confirmPasswordError,
       AsyncValue<bool> result = const AsyncValue<bool>.data(false)}) {
-    return _SignupScreenState(
+    return _SignupState(
       emailError: emailError,
       passwordError: passwordError,
       confirmPasswordError: confirmPasswordError,
@@ -28,9 +28,9 @@ class _$SignupScreenStateTearOff {
 }
 
 // ignore: unused_element
-const $SignupScreenState = _$SignupScreenStateTearOff();
+const $SignupState = _$SignupStateTearOff();
 
-mixin _$SignupScreenState {
+mixin _$SignupState {
   @nullable
   String get emailError;
   @nullable
@@ -39,13 +39,13 @@ mixin _$SignupScreenState {
   String get confirmPasswordError;
   AsyncValue<bool> get result;
 
-  $SignupScreenStateCopyWith<SignupScreenState> get copyWith;
+  $SignupStateCopyWith<SignupState> get copyWith;
 }
 
-abstract class $SignupScreenStateCopyWith<$Res> {
-  factory $SignupScreenStateCopyWith(
-          SignupScreenState value, $Res Function(SignupScreenState) then) =
-      _$SignupScreenStateCopyWithImpl<$Res>;
+abstract class $SignupStateCopyWith<$Res> {
+  factory $SignupStateCopyWith(
+          SignupState value, $Res Function(SignupState) then) =
+      _$SignupStateCopyWithImpl<$Res>;
   $Res call(
       {@nullable String emailError,
       @nullable String passwordError,
@@ -55,13 +55,12 @@ abstract class $SignupScreenStateCopyWith<$Res> {
   $AsyncValueCopyWith<bool, $Res> get result;
 }
 
-class _$SignupScreenStateCopyWithImpl<$Res>
-    implements $SignupScreenStateCopyWith<$Res> {
-  _$SignupScreenStateCopyWithImpl(this._value, this._then);
+class _$SignupStateCopyWithImpl<$Res> implements $SignupStateCopyWith<$Res> {
+  _$SignupStateCopyWithImpl(this._value, this._then);
 
-  final SignupScreenState _value;
+  final SignupState _value;
   // ignore: unused_field
-  final $Res Function(SignupScreenState) _then;
+  final $Res Function(SignupState) _then;
 
   @override
   $Res call({
@@ -94,11 +93,11 @@ class _$SignupScreenStateCopyWithImpl<$Res>
   }
 }
 
-abstract class _$SignupScreenStateCopyWith<$Res>
-    implements $SignupScreenStateCopyWith<$Res> {
-  factory _$SignupScreenStateCopyWith(
-          _SignupScreenState value, $Res Function(_SignupScreenState) then) =
-      __$SignupScreenStateCopyWithImpl<$Res>;
+abstract class _$SignupStateCopyWith<$Res>
+    implements $SignupStateCopyWith<$Res> {
+  factory _$SignupStateCopyWith(
+          _SignupState value, $Res Function(_SignupState) then) =
+      __$SignupStateCopyWithImpl<$Res>;
   @override
   $Res call(
       {@nullable String emailError,
@@ -110,15 +109,14 @@ abstract class _$SignupScreenStateCopyWith<$Res>
   $AsyncValueCopyWith<bool, $Res> get result;
 }
 
-class __$SignupScreenStateCopyWithImpl<$Res>
-    extends _$SignupScreenStateCopyWithImpl<$Res>
-    implements _$SignupScreenStateCopyWith<$Res> {
-  __$SignupScreenStateCopyWithImpl(
-      _SignupScreenState _value, $Res Function(_SignupScreenState) _then)
-      : super(_value, (v) => _then(v as _SignupScreenState));
+class __$SignupStateCopyWithImpl<$Res> extends _$SignupStateCopyWithImpl<$Res>
+    implements _$SignupStateCopyWith<$Res> {
+  __$SignupStateCopyWithImpl(
+      _SignupState _value, $Res Function(_SignupState) _then)
+      : super(_value, (v) => _then(v as _SignupState));
 
   @override
-  _SignupScreenState get _value => super._value as _SignupScreenState;
+  _SignupState get _value => super._value as _SignupState;
 
   @override
   $Res call({
@@ -127,7 +125,7 @@ class __$SignupScreenStateCopyWithImpl<$Res>
     Object confirmPasswordError = freezed,
     Object result = freezed,
   }) {
-    return _then(_SignupScreenState(
+    return _then(_SignupState(
       emailError:
           emailError == freezed ? _value.emailError : emailError as String,
       passwordError: passwordError == freezed
@@ -141,8 +139,8 @@ class __$SignupScreenStateCopyWithImpl<$Res>
   }
 }
 
-class _$_SignupScreenState extends _SignupScreenState {
-  const _$_SignupScreenState(
+class _$_SignupState extends _SignupState {
+  const _$_SignupState(
       {@nullable this.emailError,
       @nullable this.passwordError,
       @nullable this.confirmPasswordError,
@@ -165,13 +163,13 @@ class _$_SignupScreenState extends _SignupScreenState {
 
   @override
   String toString() {
-    return 'SignupScreenState(emailError: $emailError, passwordError: $passwordError, confirmPasswordError: $confirmPasswordError, result: $result)';
+    return 'SignupState(emailError: $emailError, passwordError: $passwordError, confirmPasswordError: $confirmPasswordError, result: $result)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _SignupScreenState &&
+        (other is _SignupState &&
             (identical(other.emailError, emailError) ||
                 const DeepCollectionEquality()
                     .equals(other.emailError, emailError)) &&
@@ -194,17 +192,17 @@ class _$_SignupScreenState extends _SignupScreenState {
       const DeepCollectionEquality().hash(result);
 
   @override
-  _$SignupScreenStateCopyWith<_SignupScreenState> get copyWith =>
-      __$SignupScreenStateCopyWithImpl<_SignupScreenState>(this, _$identity);
+  _$SignupStateCopyWith<_SignupState> get copyWith =>
+      __$SignupStateCopyWithImpl<_SignupState>(this, _$identity);
 }
 
-abstract class _SignupScreenState extends SignupScreenState {
-  const _SignupScreenState._() : super._();
-  const factory _SignupScreenState(
+abstract class _SignupState extends SignupState {
+  const _SignupState._() : super._();
+  const factory _SignupState(
       {@nullable String emailError,
       @nullable String passwordError,
       @nullable String confirmPasswordError,
-      AsyncValue<bool> result}) = _$_SignupScreenState;
+      AsyncValue<bool> result}) = _$_SignupState;
 
   @override
   @nullable
@@ -218,5 +216,5 @@ abstract class _SignupScreenState extends SignupScreenState {
   @override
   AsyncValue<bool> get result;
   @override
-  _$SignupScreenStateCopyWith<_SignupScreenState> get copyWith;
+  _$SignupStateCopyWith<_SignupState> get copyWith;
 }

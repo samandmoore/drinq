@@ -100,7 +100,7 @@ abstract class SignupState implements _$SignupState {
 
 class SignupModel extends StateNotifier<SignupState> {
   final Api api;
-  final AuthNotifier auth;
+  final AuthModel auth;
 
   SignupModel({
     @required this.api,

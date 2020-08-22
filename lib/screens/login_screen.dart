@@ -92,7 +92,7 @@ abstract class LoginState implements _$LoginState {
 
 class LoginModel extends StateNotifier<LoginState> {
   final Api api;
-  final AuthNotifier auth;
+  final AuthModel auth;
 
   LoginModel({
     @required this.api,

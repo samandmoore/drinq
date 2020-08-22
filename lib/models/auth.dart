@@ -6,8 +6,8 @@ import 'package:state_notifier/state_notifier.dart';
 
 part 'auth.freezed.dart';
 
-final authProvider = StateNotifierProvider<AuthNotifier>((ref) {
-  return AuthNotifier(storage: ref.read(secureStorageProvider));
+final authProvider = StateNotifierProvider<AuthModel>((ref) {
+  return AuthModel(storage: ref.read(secureStorageProvider));
 });
 
 @freezed
@@ -21,12 +21,12 @@ abstract class Auth with _$Auth {
   const factory Auth.loading() = _Loading;
 }
 
-class AuthNotifier extends StateNotifier<Auth> {
+class AuthModel extends StateNotifier<Auth> {
   static const String drinqAuthTokenStorageKey = 'drinqAuthTokenStorageKey';
 
   final FlutterSecureStorage storage;
 
-  AuthNotifier({@required this.storage}) : super(const Auth.loading()) {
+  AuthModel({@required this.storage}) : super(const Auth.loading()) {
     _loadInitialValue();
   }
 

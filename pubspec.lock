@@ -208,7 +208,7 @@ packages:
       name: flutter_riverpod
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.0-dev+2"
+    version: "0.6.1"
   flutter_secure_storage:
     dependency: "direct main"
     description:
@@ -255,7 +255,7 @@ packages:
       name: hooks_riverpod
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.0-dev+2"
+    version: "0.6.1"
   html:
     dependency: transitive
     description:
@@ -472,7 +472,7 @@ packages:
       name: riverpod
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.0-dev+2"
+    version: "0.6.1"
   shelf:
     dependency: transitive
     description:

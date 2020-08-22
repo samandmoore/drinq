@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static ThemeData build() {
     final colorScheme = ColorScheme.light(
-      surface: Colors.white,
       onSurface: Colors.grey.shade800,
     );
 

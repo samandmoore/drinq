@@ -312,6 +312,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.3.0"
+  lint:
+    dependency: "direct dev"
+    description:
+      name: lint
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
   localstorage:
     dependency: "direct main"
     description:
@@ -347,15 +354,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.9.6+3"
-  nitpicky:
-    dependency: "direct dev"
-    description:
-      path: "."
-      ref: "1.0.2"
-      resolved-ref: "514d98a0cacc831938efb604d5e001d89cd3a14a"
-      url: "https://github.com/VGVentures/nitpicky"
-    source: git
-    version: "1.0.2"
   node_interop:
     dependency: transitive
     description:

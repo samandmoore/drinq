@@ -25,7 +25,7 @@ class EditRecipeScreen extends HookWidget {
           TextField(
             controller: nameController,
             decoration: const InputDecoration(
-              labelText: 'What\'s this drink called?',
+              labelText: "What's this drink called?",
             ),
           ),
           const VSpace(byFactorOf: 2),

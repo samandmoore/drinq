@@ -91,7 +91,7 @@ class AddRecipeScreen extends HookWidget {
                 TextField(
                   controller: nameController,
                   decoration: InputDecoration(
-                    labelText: 'What\'s this drink called?',
+                    labelText: "What's this drink called?",
                     errorText: state.nameError,
                   ),
                 ),

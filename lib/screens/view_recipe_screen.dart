@@ -1,6 +1,5 @@
 import 'package:drinq/models/api.dart';
 import 'package:drinq/models/recipe.dart';
-import 'package:drinq/screens/edit_recipe_screen.dart';
 import 'package:drinq/utils/body_text.dart';
 import 'package:drinq/utils/header.dart';
 import 'package:drinq/utils/nav.dart';
@@ -49,20 +48,6 @@ class _RecipeDataView extends StatelessWidget {
       children: [
         Header(recipe.name),
         BodyText(recipe.toString()),
-        Builder(
-          builder: (context) => OutlineButton(
-            onPressed: () async {
-              final edited = await Nav.of(context)
-                  .presentScreen<bool>((_) => EditRecipeScreen(recipe: recipe));
-              if (edited == true) {
-                Scaffold.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(
-                      const SnackBar(content: Text('Recipe updated!')));
-              }
-            },
-          ),
-        ),
         OutlineButton(
           onPressed: () {
             showModalBottomSheet<void>(

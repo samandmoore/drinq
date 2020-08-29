@@ -44,51 +44,49 @@ class AllRecipesScreen extends StatelessWidget {
   }
 }
 
-class RecipeList extends StatelessWidget {
+class RecipeList extends ConsumerWidget {
   const RecipeList({
     Key key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Consumer((_, read) {
-      final recipes = read(recipesProvider);
+  Widget build(BuildContext context, ScopedReader watch) {
+    final recipes = watch(recipesProvider);
 
-      return recipes.when(
-        data: (data) {
-          if (data.isEmpty) {
-            return const Empty();
-          }
-          return ListView.builder(
-            shrinkWrap: true,
-            itemCount: data.length,
-            itemBuilder: (context, index) {
-              final recipe = data[index];
-              return RecipeListRow(
-                recipe: recipe,
-                includeDivider: index < data.length,
-              );
-            },
-          );
-        },
-        loading: () {
-          return const Center(child: CircularProgressIndicator());
-        },
-        error: (e, __) {
-          return Center(
-            child: Column(
-              children: [
-                Text(e.toString()),
-                OutlineButton(
-                  onPressed: () => context.refresh(recipesProvider),
-                  child: const Text('Retry'),
-                )
-              ],
-            ),
-          );
-        },
-      );
-    });
+    return recipes.when(
+      data: (data) {
+        if (data.isEmpty) {
+          return const Empty();
+        }
+        return ListView.builder(
+          shrinkWrap: true,
+          itemCount: data.length,
+          itemBuilder: (context, index) {
+            final recipe = data[index];
+            return RecipeListRow(
+              recipe: recipe,
+              includeDivider: index < data.length,
+            );
+          },
+        );
+      },
+      loading: () {
+        return const Center(child: CircularProgressIndicator());
+      },
+      error: (e, __) {
+        return Center(
+          child: Column(
+            children: [
+              Text(e.toString()),
+              OutlineButton(
+                onPressed: () => context.refresh(recipesProvider),
+                child: const Text('Retry'),
+              )
+            ],
+          ),
+        );
+      },
+    );
   }
 }
 

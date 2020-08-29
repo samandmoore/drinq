@@ -121,8 +121,7 @@ class SignupModel extends StateNotifier<SignupState> {
     if (state.hasErrors()) return false;
 
     state = state.copyWith(
-      confirmPasswordError:
-          confirmPassword != password ? 'Must match password' : null,
+      confirmPasswordError: confirmPassword != password ? 'Must match password' : null,
     );
 
     if (state.hasErrors()) return false;

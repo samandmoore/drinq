@@ -17,19 +17,13 @@ class Api {
 
   const Api({@required LocalStorage storage}) : _storage = storage;
 
-  Future<String> createLogin({
-    @required String email,
-    @required String password,
-  }) async {
+  Future<String> createLogin({@required String email, @required String password}) async {
     // in a real API we'd actually check your creds...
     final basicAuthEncoded = base64Encode(utf8.encode('$email:$password'));
     return 'Basic $basicAuthEncoded';
   }
 
-  Future<String> createUser({
-    @required String email,
-    @required String password,
-  }) async {
+  Future<String> createUser({@required String email, @required String password}) async {
     final basicAuthEncoded = base64Encode(utf8.encode('$email:$password'));
     return 'Basic $basicAuthEncoded';
   }
@@ -82,9 +76,7 @@ class Api {
     await Future<void>.delayed(Duration(milliseconds: Random().nextInt(2000)));
 
     final data = _storage.getItem('recipes') as Map<String, dynamic>;
-    return data == null
-        ? const RecipeData(recipes: [])
-        : RecipeData.fromJson(data);
+    return data == null ? const RecipeData(recipes: []) : RecipeData.fromJson(data);
   }
 
   Future<void> _saveData(RecipeData data) async {
@@ -100,6 +92,5 @@ abstract class RecipeData with _$RecipeData {
     @required List<Recipe> recipes,
   }) = _RecipeData;
 
-  factory RecipeData.fromJson(Map<String, dynamic> json) =>
-      _$RecipeDataFromJson(json);
+  factory RecipeData.fromJson(Map<String, dynamic> json) => _$RecipeDataFromJson(json);
 }

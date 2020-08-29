@@ -60,8 +60,7 @@ class LoginScreen extends HookWidget {
             ),
             HStretch(
               child: FlatButton(
-                onPressed: () =>
-                    Nav.of(context).presentScreen((_) => const SignupScreen()),
+                onPressed: () => Nav.of(context).presentScreen((_) => const SignupScreen()),
                 child: const Text('sign up'),
               ),
             )

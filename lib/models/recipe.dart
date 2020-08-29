@@ -11,8 +11,7 @@ final recipesProvider = FutureProvider<List<Recipe>>((ref) {
 });
 
 final currentRecipeIdProvider = StateProvider<String>((_) => null);
-final currentRecipeProvider =
-    Provider.autoDispose.family<AsyncValue<Recipe>, String>((ref, id) {
+final currentRecipeProvider = Provider.autoDispose.family<AsyncValue<Recipe>, String>((ref, id) {
   final recipes = ref.watch(recipesProvider);
   return recipes.whenData((value) => value.singleWhere((r) => r.id == id));
 });

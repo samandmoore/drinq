@@ -30,8 +30,7 @@ class AllRecipesScreen extends StatelessWidget {
       fab: Builder(builder: (context) {
         return FloatingActionButton(
           onPressed: () async {
-            final recipeAdded = await Nav.of(context)
-                .presentScreen<bool>((_) => const AddRecipeScreen());
+            final recipeAdded = await Nav.of(context).presentScreen<bool>((_) => const AddRecipeScreen());
             if (recipeAdded == true) {
               Scaffold.of(context)
                 ..hideCurrentSnackBar()

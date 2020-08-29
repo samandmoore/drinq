@@ -10,10 +10,7 @@ class FormLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: items.asMap().entries.expand((entry) {
-        return [
-          entry.value,
-          if (entry.key < items.length) const VSpace(byFactorOf: 2)
-        ];
+        return [entry.value, if (entry.key < items.length) const VSpace(byFactorOf: 2)];
       }).toList(growable: false),
     );
   }
